@@ -17,23 +17,28 @@ Route::get('/dashboard', function () {
         return response()->json(['message' => 'welcome to dashboard spk v1']);
 });
 
+// dashboard pages
+Route::get('/admin', function () {
+    return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
+})->name('admin');
+
 // Route fro criteria
 Route::apiResource('criteria',CriteriaController::class);
+ 
+// // Route for weight
+// Route::apiResource('weights', WeightController::class);
 
-// Route for weight
-Route::apiResource('weights', WeightController::class);
+// // Route for alternative
+// Route::apiResource('alternatives', AlternativeController::class);
 
-// Route for alternative
-Route::apiResource('alternatives', AlternativeController::class);
+// // Route for calculation
+// Route::apiResource('calculations', CalculationController::class);
 
-// Route for calculation
-Route::apiResource('calculations', CalculationController::class);
+// // Route for weighted comparasion
+// Route::apiResource('weighted-comparisons', WeightedComparisonController::class);
 
-// Route for weighted comparasion
-Route::apiResource('weighted-comparisons', WeightedComparisonController::class);
-
-// Route for ranking comparation
-Route::apiResource('ranking-comparisons', RankingComparisonController::class);
+// // Route for ranking comparation
+// Route::apiResource('ranking-comparisons', RankingComparisonController::class);
 
 // Route for user
 Route::get('/user', function (Request $request) {

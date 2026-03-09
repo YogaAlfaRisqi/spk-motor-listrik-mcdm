@@ -1,12 +1,14 @@
 <div class="mx-auto mb-10 w-full max-w-60 rounded-2xl bg-gray-50 px-4 py-5 text-center dark:bg-white/[0.03]">
-    <h3 class="mb-2 font-semibold text-gray-900 dark:text-white">
-        #1 Tailwind CSS Dashboard
-    </h3>
-    <p class="mb-4 text-gray-500 text-theme-sm dark:text-gray-400">
-        Leading Tailwind CSS Admin Template with 500+ UI Component and Pages.
+    <h1 class="text-2xl font-bold text-gray-700 dark:text-gray-200 mb-2">
+      Selamat Datang, Admin!
+    </h1>
+
+    <p class="text-gray-500 dark:text-gray-400 mb-4">
+      Berikut adalah ringkasan informasi terbaru di dashboard Anda.
     </p>
-    <a href="https://tailadmin.com/pricing" target="_blank" rel="nofollow"
-        class="flex items-center justify-center p-3 font-medium text-white rounded-lg bg-brand-500 text-theme-sm hover:bg-brand-600">
-        Purchase Plan
-    </a>
+
+    <span class="px-4 py-2 text-sm font-medium rounded-lg 
+      bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow">
+        Admin Dashboard
+      </span>
 </div>

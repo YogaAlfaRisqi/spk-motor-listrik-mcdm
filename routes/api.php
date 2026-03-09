@@ -19,7 +19,7 @@ Route::get('/dashboard', function () {
 
 // dashboard pages
 Route::get('/admin', function () {
-    return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
+    return view('pages.dashboard.welcome-page', ['title' => 'Dashboard']);
 })->name('admin');
 
 // Route fro criteria

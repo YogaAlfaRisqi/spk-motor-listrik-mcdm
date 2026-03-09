@@ -49,9 +49,21 @@
             </button>
 
             <!-- Logo (mobile only) -->
-            <a href="/" class="xl:hidden">
+            <!-- <a href="/" class="xl:hidden">
                 <img class="dark:hidden" src="/images/logo/logo.svg" alt="Logo" />
                 <img class="hidden dark:block" src="/images/logo/logo-dark.svg" alt="Logo" />
+            </a> -->
+            <!-- Logo (mobile only) -->
+            <a href="/" class="xl:hidden flex items-center">
+
+                <span class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Electric-Motor
+                </span>
+
+                <span class="ml-1 text-sm font-semibold text-blue-600 dark:text-blue-400">
+                    SPK
+                </span>
+
             </a>
 
             <!-- Application Menu Toggle (mobile only) -->

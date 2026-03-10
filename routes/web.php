@@ -8,6 +8,11 @@ Route::get('/home', function () {
     return 'Hello, World!';
 });
 
+// dashboard pages
+Route::get('/admin', function () {
+    return view('pages.dashboard.welcome-page', ['title' => 'Dashboard']);
+})->name('admin');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

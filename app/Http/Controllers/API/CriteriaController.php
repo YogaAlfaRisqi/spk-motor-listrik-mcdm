@@ -1,103 +1,54 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\ApiResponse;
 use App\Services\CriteriaService;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCriteriaRequest;
+use App\Http\Requests\UpdateCriteriaRequest;
 
 class CriteriaController extends Controller
 {
-   
-    protected CriteriaService $service;
-    public function __construct(CriteriaService $service)
+    protected $criteriaService;
+
+    public function __construct(CriteriaService $criteriaService)
     {
-        $this->service = $service;
+        $this->criteriaService = $criteriaService;
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
-        $criteria = $this->service->getAllCriteria();
-        return response()->json([
-            "status"=>"success",
-            "data"=>$criteria
-        ]);
+        $data = $this->criteriaService->getAll();
+
+        return ApiResponse::success($data, 'Criteria list retrieved');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show($id)
     {
-        //
-        $criteria = $this->service->createCriteria($request->all());
-        return response()->json([
-                'status' => 'success',
-                'message' => 'Criteria created successfully',
-                'data' => $criteria
-        ]);
+        $data = $this->criteriaService->getById($id);
+
+        return ApiResponse::success($data, 'Criteria detail retrieved');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function store(StoreCriteriaRequest $request)
     {
-        //
-        $criteria = $this->service->getCriteriaById($id);
-        if (!$criteria) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Criteria not found'
-            ], 404);
-        }
-        return response()->json([
-            "status"=>"success",
-            "data"=>$criteria
-        ]);
+        $data = $this->criteriaService->create($request->validated());
+
+        return ApiResponse::success($data, 'Criteria created', 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateCriteriaRequest $request, $id)
     {
-        //
-        $criteria = $this->service->updateCriteria($id, $request->all());
-        if (!$criteria) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Criteria not found'
-            ], 404);
-        }
-        return response()->json([
-            "status"=>"success",
-            "message"=>"Criteria updated successfully",
-            "data"=>$criteria
-        ]);
-        
+        $data = $this->criteriaService->update($id, $request->validated());
+
+        return ApiResponse::success($data, 'Criteria updated');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //'
-        $deleted = $this->service->deleteCriteria($id);
-        if (!$deleted) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Criteria not found'
-            ], 404);
-        }
-        return response()->json([
-            "status"=>"success",
-            "message"=>"Criteria deleted (mock)",
-            "id"=>$id
-        ]);
+        $this->criteriaService->delete($id);
+
+        return ApiResponse::success(null, 'Criteria deleted');
     }
 }

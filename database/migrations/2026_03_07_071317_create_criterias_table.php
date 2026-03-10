@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_kriteria')->unique();
+            $table->string('nama_kriteria');
+            $table->text('keterangan')->nullable();
+            $table->string('skala_penilaian')->nullable();
+            $table->enum('tipe', ['benefit', 'cost']);
             $table->timestamps();
         });
     }

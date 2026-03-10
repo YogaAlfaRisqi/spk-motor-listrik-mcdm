@@ -13,16 +13,6 @@ Route::get('/', function () {
         ]);
 });
 
-// Route for dashboard
-Route::get('/dashboard', function () {
-        return response()->json(['message' => 'welcome to dashboard spk v1']);
-});
-
-// dashboard pages
-Route::get('/admin', function () {
-    return view('pages.dashboard.welcome-page', ['title' => 'Dashboard']);
-})->name('admin');
-
 // Route fro criteria
 Route::apiResource('criteria',CriteriaController::class);
  

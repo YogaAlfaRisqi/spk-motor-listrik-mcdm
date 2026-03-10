@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AlternativeController;
 use App\Http\Controllers\API\CriteriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,8 +29,8 @@ Route::apiResource('criteria',CriteriaController::class);
 // // Route for weight
 // Route::apiResource('weights', WeightController::class);
 
-// // Route for alternative
-// Route::apiResource('alternatives', AlternativeController::class);
+// Route for alternative
+Route::apiResource('alternative', AlternativeController::class);
 
 // // Route for calculation
 // Route::apiResource('calculations', CalculationController::class);

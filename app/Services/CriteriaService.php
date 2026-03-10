@@ -5,9 +5,11 @@ namespace App\Services;
 class CriteriaService
 {
     private static array $criteria = [
-        ['id' => 1, 'name' => 'Criteria 1', 'weight' => 0.3],
-        ['id' => 2, 'name' => 'Criteria 2', 'weight' => 0.5],
-        ['id' => 3, 'name' => 'Criteria 3', 'weight' => 0.2],
+        ['id' => 1, 'kode kriteria' => 'C1', 'name kriteria' => 'Criteria 1', 'keterangan' => 'Biaya awal pembelian', 'tipe' => 'cost'],
+        ['id' => 2, 'kode kriteria' => 'C2', 'name kriteria' => 'Criteria 2', 'keterangan' => 'Keuntungan jangka pendek', 'tipe' => 'benefit'],
+        ['id' => 3, 'kode kriteria' => 'C3', 'name kriteria' => 'Criteria 3', 'keterangan' => 'Risiko investasi', 'tipe' => 'cost'],
+        ['id' => 4, 'kode kriteria' => 'C3', 'name kriteria' => 'Criteria 3', 'keterangan' => 'Risiko investasi', 'tipe' => 'benefit'],
+        ['id' => 5, 'kode kriteria' => 'C3', 'name kriteria' => 'Criteria 3', 'keterangan' => 'Risiko investasi', 'tipe' => 'benefit'],
     ];
 
     public static function getAllCriteria()

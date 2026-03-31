@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\CriteriaRepository;
+use App\Repositories\Interfaces\CriteriaRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Bind repository interfaces to their implementations
+        $this->app->bind(
+            CriteriaRepositoryInterface::class,
+            CriteriaRepository::class
+        );
     }
 
     /**

@@ -11,7 +11,7 @@ class StoreCriteriaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,11 @@ class StoreCriteriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'weight' => 'required|numeric|min:0|max:1'
+            'kode_kriteria' => 'required|string|max:10',
+            'nama_kriteria' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
+            'skala_penilaian' => 'required|string|max:255',
+            'tipe' => 'required|in:benefit,cost'
         ];
     }
 }

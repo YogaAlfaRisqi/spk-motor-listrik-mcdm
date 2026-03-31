@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AlternativeController;
 use App\Http\Controllers\API\CriteriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,24 +13,14 @@ Route::get('/', function () {
         ]);
 });
 
-// Route for dashboard
-Route::get('/dashboard', function () {
-        return response()->json(['message' => 'welcome to dashboard spk v1']);
-});
-
-// dashboard pages
-Route::get('/admin', function () {
-    return view('pages.dashboard.welcome-page', ['title' => 'Dashboard']);
-})->name('admin');
-
 // Route fro criteria
 Route::apiResource('criteria',CriteriaController::class);
  
 // // Route for weight
 // Route::apiResource('weights', WeightController::class);
 
-// // Route for alternative
-// Route::apiResource('alternatives', AlternativeController::class);
+// Route for alternative
+Route::apiResource('alternative', AlternativeController::class);
 
 // // Route for calculation
 // Route::apiResource('calculations', CalculationController::class);

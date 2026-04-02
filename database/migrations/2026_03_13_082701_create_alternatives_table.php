@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('alternatives', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_motor');
+            $table->integer('harga');
+            $table->integer('jarak_tempuh');
+            $table->integer('waktu_pengisian');
+            $table->decimal('kapasitas_baterai', 10, 2);
+            $table->decimal('daya_maksimum', 10, 2);
             $table->timestamps();
         });
     }

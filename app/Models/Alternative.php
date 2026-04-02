@@ -11,7 +11,11 @@ class Alternative extends Model
     use HasFactory;
 
 protected $fillable = [
-        'nama_alternatif',
-        
+        'nama_motor',
+        'harga',
+        'jarak_tempuh',
+        'waktu_pengisian',
+        'kapasitas_baterai',
+        'daya_maksimum'
     ];
 }

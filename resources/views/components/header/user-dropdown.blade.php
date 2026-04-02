@@ -14,10 +14,12 @@
         type="button"
     >
         <span class="mr-3 overflow-hidden rounded-full h-11 w-11">
-            <img src="/images/user/owner.png" alt="User" />
+            <img src="{{ Auth::user()->profile_photo_url ?? '/images/user/default.png' }}" alt="{{ Auth::user()->name }}" />
         </span>
 
-       <span class="block mr-1 font-medium text-theme-sm">Maya Putri</span>
+       <span class="block mr-1 font-medium text-theme-sm">
+        {{ Auth::user()->name }}
+       </span>
 
         <!-- Chevron Icon -->
         <svg

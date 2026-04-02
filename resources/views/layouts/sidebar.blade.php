@@ -78,7 +78,7 @@ $currentPath = request()->path();
     ? 'xl:justify-center'
     : 'justify-start'">
 
-        <a href="/" class="flex items-center">
+        <a wire:navigatehref="/" class="flex items-center">
 
             <!-- Logo Full (Sidebar Expand) -->
             <div
@@ -140,7 +140,7 @@ $currentPath = request()->path();
                         <li>
                             @if (isset($item['subItems']))
                             <!-- Menu Item with Submenu -->
-                            <button @click="toggleSubmenu({{ $groupIndex }}, {{ $itemIndex }})"
+                            <button wire:navigate @click="toggleSubmenu({{ $groupIndex }}, {{ $itemIndex }})"
                                 class="menu-item group w-full"
                                 :class="[
                                                 isSubmenuOpen({{ $groupIndex }}, {{ $itemIndex }}) ?
@@ -187,7 +187,7 @@ $currentPath = request()->path();
                                 <ul class="mt-2 space-y-1 ml-9">
                                     @foreach ($item['subItems'] as $subItem)
                                     <li>
-                                        <a href="{{ $subItem['path'] }}" class="menu-dropdown-item"
+                                        <a wire:navigate href="{{ $subItem['path'] }}" class="menu-dropdown-item"
                                             :class="isActive('{{ $subItem['path'] }}') ?
                                                                 'menu-dropdown-item-active' :
                                                                 'menu-dropdown-item-inactive'">
@@ -217,7 +217,7 @@ $currentPath = request()->path();
                             </div>
                             @else
                             <!-- Simple Menu Item -->
-                            <a href="{{ $item['path'] }}" class="menu-item group"
+                            <a wire:navigate href="{{ $item['path'] }}"  class="menu-item group"
                                 :class="[
                                                 isActive('{{ $item['path'] }}') ? 'menu-item-active' :
                                                 'menu-item-inactive',

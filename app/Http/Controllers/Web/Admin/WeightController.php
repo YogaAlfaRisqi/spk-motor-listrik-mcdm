@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\Alternative;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AlternativeController extends Controller
+class WeightController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +13,7 @@ class AlternativeController extends Controller
     public function index()
     {
         //
+        return view('pages.weight.weight-page', ['title' => 'Bobot']);
     }
 
     /**
@@ -34,7 +35,7 @@ class AlternativeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Alternative $alternative)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +43,7 @@ class AlternativeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alternative $alternative)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +51,7 @@ class AlternativeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alternative $alternative)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +59,7 @@ class AlternativeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alternative $alternative)
+    public function destroy(string $id)
     {
         //
     }

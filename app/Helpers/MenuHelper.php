@@ -10,35 +10,35 @@ class MenuHelper
             [
                 'icon' => 'dashboard',
                 'name' => 'Dashboard',
-                'path' => 'http://127.0.0.1:8000/api/v1/admin',
+                'path' => '/dashboard',
             ],
             [
                 'icon' => 'calendar',
                 'name' => 'Criteria',
-                'path' => '/http://127.0.0.1:8000/api/v1/criteria',
+                'path' => '/criteria',
             ],
              [
                 'icon' => 'calendar',
                 'name' => 'Alternatives',
-                'path' => '/calendar',
+                'path' => '/alternatives',
             ],
             
             [
                 'icon' => 'user-profile',
-                'name' => 'Weight',
-                'path' => '/profile',
+                'name' => 'Bobot',
+                'path' => '/weight',
             ],
             // [
             [
                 'icon' => 'user-profile',
-                'name' => 'Weight Comparison',
-                'path' => '/profile',
+                'name' => 'Nilai Alternatif',
+                'path' => '/alternative-values',
             ],
 
             [
                 'icon' => 'user-profile',
-                'name' => 'Ranking Comparison',
-                'path' => '/profile',
+                'name' => 'Hasil Rekomendasi',
+                'path' => '/recomendation-result',
             ],
 
             // [
@@ -89,18 +89,18 @@ class MenuHelper
             //         ['name' => 'Videos', 'path' => '/videos', 'pro' => false],
             //     ],
             // ],
-            [
-                'icon' => 'authentication',
-                'name' => 'Authentication',
-                'subItems' => [
-                    ['name' => 'Sign In', 'path' => '/signin', 'pro' => false],
-                    ['name' => 'Sign Up', 'path' => '/signup', 'pro' => false],
-                ],
-            ],
+            // [
+            //     'icon' => 'authentication',
+            //     'name' => 'Authentication',
+            //     'subItems' => [
+            //         ['name' => 'Sign In', 'path' => '/signin', 'pro' => false],
+            //         ['name' => 'Sign Up', 'path' => '/signup', 'pro' => false],
+            //     ],
+            // ],
             [
                 'icon' => 'user-profile',
                 'name' => 'User Management',
-                'path' => '/profile',
+                'path' => '/users',
             ],
         ];
     }

@@ -10,29 +10,41 @@ use App\Http\Controllers\Web\Admin\RecomendationResultController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Public\HomeController;
 
-// User Routes
-// Route::view('/', 'welcome');
 
-// Route::get('/home', function () {
-//     return 'Hello, World!';
-// });
-
+// public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', function () {
+//     return view('pages.home');
+// })->name('home');
+ 
+Route::get('/cara-kerja', function () {
+    return view('pages.how-it-works');
+})->name('how-it-works');
+ 
+Route::get('/tentang', function () {
+    return view('pages.about');
+})->name('about');
+ 
+Route::get('/rekomendasi', function () {
+    return view('pages.recommendation');
+})->name('recommendation');
 
 // Admin Routes
-Route::resource('dashboard', DashboardController::class);
-Route::resource('criteria', CriteriaController::class);
-Route::resource('alternatives', AlternativeController::class);
-Route::resource('weight',WeightController::class);
-Route::resource('alternative-values', AlternativeValueController::class);
-Route::resource('recomendation-result', RecomendationResultController::class);
-Route::resource('users', UserController::class);
-// Route::view('dashboard', 'dashboard')
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('dashboard', DashboardController::class);
+        Route::resource('criteria', CriteriaController::class);
+        Route::resource('alternatives', AlternativeController::class);
+        Route::resource('weight', WeightController::class);
+        Route::resource('alternative-values', AlternativeValueController::class);
+        Route::resource('recommendation-results', RecomendationResultController::class);
+        Route::resource('users', UserController::class);
+        Route::view('profile', 'profile')
+            ->name('profile');
+    });
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';

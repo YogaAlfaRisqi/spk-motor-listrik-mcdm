@@ -10,35 +10,35 @@ class MenuHelper
             [
                 'icon' => 'dashboard',
                 'name' => 'Dashboard',
-                'path' => '/dashboard',
+                'path' => '/admin/dashboard',
             ],
             [
                 'icon' => 'calendar',
                 'name' => 'Criteria',
-                'path' => '/criteria',
+                'path' => '/admin/criteria',
             ],
              [
                 'icon' => 'calendar',
                 'name' => 'Alternatives',
-                'path' => '/alternatives',
+                'path' => '/admin/alternatives',
             ],
             
             [
                 'icon' => 'user-profile',
                 'name' => 'Bobot',
-                'path' => '/weight',
+                'path' => '/admin/weight',
             ],
             // [
             [
                 'icon' => 'user-profile',
                 'name' => 'Nilai Alternatif',
-                'path' => '/alternative-values',
+                'path' => '/admin/alternative-values',
             ],
 
             [
                 'icon' => 'user-profile',
                 'name' => 'Hasil Rekomendasi',
-                'path' => '/recomendation-result',
+                'path' => '/admin/recommendation-results',
             ],
 
             // [
@@ -100,7 +100,7 @@ class MenuHelper
             [
                 'icon' => 'user-profile',
                 'name' => 'User Management',
-                'path' => '/users',
+                'path' => '/admin/users',
             ],
         ];
     }

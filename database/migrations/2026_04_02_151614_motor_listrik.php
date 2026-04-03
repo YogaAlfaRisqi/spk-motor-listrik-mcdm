@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alternatives', function (Blueprint $table) {
-            $table->id();
+        //
+        Schema::create('motor_listrik', function (Blueprint $table) {
+            $table->id('id_motor');
             $table->string('nama_motor');
             $table->integer('harga');
             $table->integer('jarak_tempuh');
             $table->integer('waktu_pengisian');
-            $table->decimal('kapasitas_baterai', 10, 2);
-            $table->decimal('daya_maksimum', 10, 2);
+            $table->decimal('kapasitas_baterai', 8, 2);
+            $table->decimal('daya_maksimum', 8, 2);
+            $table->foreignId('created_by')
+                ->constrained('users','id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -28,6 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alternatives');
+        //
+        Schema::dropIfExists('motor_listrik');
     }
 };

@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         //
-        return view('pages.public.home.landing-page', ['title' => 'Home']);
+        return view('pages.home', ['title' => 'Home']);
     }
 
     /**

@@ -94,6 +94,7 @@
     </script>
 </head>
 
+
 <body
     x-data="{ 'loaded': true}"
     x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
@@ -114,7 +115,7 @@
 
     <div class="min-h-screen xl:flex">
         @include('layouts.backdrop')
-        
+
         @include('layouts.sidebar')
 
         <div class="flex-1 transition-all duration-300 ease-in-out"
@@ -134,7 +135,7 @@
     </div>
 
     @livewireScripts
-
+    @livewire('components.modal-form')
 </body>
 
 @stack('scripts')

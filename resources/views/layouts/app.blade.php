@@ -135,7 +135,7 @@
     </div>
 
     @livewireScripts
-    @livewire('components.modal-form')
+    
 </body>
 
 @stack('scripts')

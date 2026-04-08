@@ -5,14 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ $title ?? 'Dashboard' }} | SPK - Rekomendasi Pemilihan Motor Listrik</title>
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles
-
     <!-- Alpine.js -->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
@@ -132,6 +129,8 @@
             </div>
         </div>
 
+        @livewire('components.dynamic-crud-modal')
+
     </div>
 
     @livewireScripts
@@ -139,5 +138,4 @@
 </body>
 
 @stack('scripts')
-
 </html>

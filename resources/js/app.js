@@ -17,6 +17,18 @@ window.FullCalendar = Calendar;
 
 Alpine.start();
 
+// Event listener untuk success/error notifications
+window.addEventListener('crud-success', event => {
+    // Anda bisa menambahkan toast notification di sini
+    console.log('Success:', event.detail.message);
+});
+ 
+window.addEventListener('crud-error', event => {
+    // Anda bisa menambahkan toast notification di sini
+    console.log('Error:', event.detail.message);
+});
+ 
+
 // Initialize components on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     // Map imports

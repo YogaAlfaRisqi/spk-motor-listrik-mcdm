@@ -9,7 +9,9 @@ use App\Http\Controllers\Web\Admin\AlternativeValueController;
 use App\Http\Controllers\Web\Admin\RecomendationResultController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Public\HomeController;
-
+use App\Livewire\Actions\Logout;
+use App\Livewire\Pages\CriteriaManagement;
+use App\Livewire\Pages\KriteriaPage;
 
 // public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,7 +37,7 @@ Route::middleware(['auth'])
     ->name('admin.')
     ->group(function () {
         Route::resource('dashboard', DashboardController::class);
-        Route::resource('criteria', CriteriaController::class);
+        // Route::resource('criteria', CriteriaController::class);
         Route::resource('alternatives', AlternativeController::class);
         Route::resource('weight', WeightController::class);
         Route::resource('alternative-values', AlternativeValueController::class);
@@ -43,8 +45,8 @@ Route::middleware(['auth'])
         Route::resource('users', UserController::class);
         Route::view('profile', 'profile')
             ->name('profile');
+        Route::get('criteria', KriteriaPage::class)->name('criteria');
+        
     });
-
-
 
 require __DIR__ . '/auth.php';

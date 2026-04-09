@@ -129,7 +129,7 @@
             </div>
 
             <!-- User Dropdown -->
-            <x-header.user-dropdown />
+            @livewire('user-dropdown')
         </div>
     </div>
 </header>

@@ -47,6 +47,7 @@
                         <tr class="border-gray-200 border-y dark:border-gray-700">
                             <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Kode Kriteria</th>
                             <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Nama Kriteria</th>
+                            <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Keterangan</th>
                             <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Satuan</th>
                             <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Tipe</th>
                             <th scope="col" class="px-4 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Action</th>
@@ -66,6 +67,13 @@
                             <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-600 dark:text-gray-300">
                                     {{ $criteria->nama_kriteria }}
+                                </div>
+                            </td>
+
+                            <!-- KETERANGAN -->
+                            <td class="px-4 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-600 dark:text-gray-300">
+                                    {{ $criteria->keterangan }}
                                 </div>
                             </td>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Criteria;
+use App\Services\CriteriaService;
 use Illuminate\Http\Request;
 
 class RecomendationResultController extends Controller
@@ -10,10 +12,14 @@ class RecomendationResultController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct(
+        protected CriteriaService $service
+    ){}
     public function index()
     {
         //
-        return view('pages.recomendation-result.recomendation-result-page', ['title' => 'Hasil Rekomendasi']);
+        $criterias = $this->service->getAll();
+        return view('pages.recomendation-result.recomendation-result-page', ['title' => 'Hasil Rekomendasi', 'criterias' => $criterias]);
     }
 
     /**

@@ -93,7 +93,7 @@
 
 
 <body
-    x-data="{ 'loaded': true}"
+    x-data="{ 'loaded': false}"
     x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
     const checkMobile = () => {
         if (window.innerWidth < 1280) {
@@ -129,13 +129,16 @@
             </div>
         </div>
 
-        @livewire('components.dynamic-crud-modal')
+
+        <!-- Global Modal Component -->
+        @include('common.global-modal')
 
     </div>
 
     @livewireScripts
-    
+
 </body>
 
 @stack('scripts')
+
 </html>

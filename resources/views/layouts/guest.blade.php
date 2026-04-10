@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'SPK Motor Listrik') }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,7 +14,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    @livewireStyles
     <!-- Theme Store -->
     <script>
         document.addEventListener('alpine:init', () => {
@@ -107,12 +107,8 @@ window.addEventListener('resize', checkMobile);">
     {{-- preloader --}}
     <x-common.preloader />
     {{-- preloader end --}}
-
-    <!-- FULLSCREEN SLOT (IMPORTANT) -->
-    <main>
         {{ $slot }}
-    </main>
-
+    @livewireScripts(['navigate' => true])
 </body>
 
 </html>

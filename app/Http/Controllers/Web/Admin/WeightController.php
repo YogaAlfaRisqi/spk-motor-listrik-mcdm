@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BobotKriteria;
+use App\Models\Criteria;
 use Illuminate\Http\Request;
 
 class WeightController extends Controller
@@ -13,7 +15,9 @@ class WeightController extends Controller
     public function index()
     {
         //
-        return view('pages.weight.weight-page', ['title' => 'Bobot']);
+        $bobot = BobotKriteria::with('kriteria')->get();
+        $criterias = Criteria::all();
+        return view('pages.weight.weight-page', ['title' => 'Bobot', 'bobot' => $bobot, 'criterias' => $criterias]);
     }
 
     /**

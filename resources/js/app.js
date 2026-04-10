@@ -1,6 +1,12 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 import ApexCharts from 'apexcharts';
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
+// import Clipboard from '@ryangjchandler/alpine-clipboard'
+ 
+Alpine.plugin(Clipboard)
+ 
+Livewire.start()
 
 // flatpickr
 import flatpickr from 'flatpickr';
@@ -9,25 +15,12 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Calendar } from '@fullcalendar/core';
 
 
-
 window.Alpine = Alpine;
 window.ApexCharts = ApexCharts;
 window.flatpickr = flatpickr;
 window.FullCalendar = Calendar;
 
 Alpine.start();
-
-// Event listener untuk success/error notifications
-window.addEventListener('crud-success', event => {
-    // Anda bisa menambahkan toast notification di sini
-    console.log('Success:', event.detail.message);
-});
- 
-window.addEventListener('crud-error', event => {
-    // Anda bisa menambahkan toast notification di sini
-    console.log('Error:', event.detail.message);
-});
- 
 
 // Initialize components on DOM ready
 document.addEventListener('DOMContentLoaded', () => {

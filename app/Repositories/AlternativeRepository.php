@@ -2,42 +2,42 @@
 
 namespace App\Repositories;
 
-use App\Models\Alternative;
+use App\Models\MotorListrik;
 use App\Repositories\Interfaces\AlternativeRepositoryInterface;
-use Ramsey\Collection\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class AlternativeRepository implements AlternativeRepositoryInterface
 {
-    public function getAll(): Collection
+    public function getAll(): Collection    
     {
         // todo: To get all alternatives data from database
-        return Alternative::orderBy('kode_alternatif')->get();
+        return MotorListrik::orderBy('id_motor')->get();
     }
 
-    public function findById(int $id)
+    public function findById(int $id_motor): ?MotorListrik
     {
         // todo: To find alternative by ID from database
-        return Alternative::find($id);
+        return MotorListrik::find($id_motor);
     }
 
-    public function store(array $data)
+    public function store(array $data): MotorListrik
     {
         // todo: To store new alternative data in the database
-        return Alternative::create($data);
+        return MotorListrik::create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id_motor, array $data): MotorListrik
     {
         // todo: To update alternative data by ID in the database
-        $alternative = Alternative::findOrFail($id);
+        $alternative = MotorListrik::findOrFail($id_motor);
         $alternative->update($data);
         return $alternative->refresh();
     }
 
-    public function delete(int $id)
+    public function delete(int $id_motor): bool
     {
         // todo: To delete alternative by ID from database
-        $alternative = Alternative::findOrFail($id);
+        $alternative = MotorListrik::findOrFail($id_motor);
         return $alternative->delete();
     }
 

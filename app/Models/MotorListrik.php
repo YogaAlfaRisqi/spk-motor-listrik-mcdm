@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MotorListrik extends Model
 {
-    //
-    protected $table = 'motor_listrik'; // sesuaikan nama tabel kamu
-    protected $primaryKey = 'id_motor';
-    public $incrementing = true;
-    protected $keyType = 'int';
+    use HasFactory;
+
+    protected $table = 'motor_listrik'; // 🔥 wajib
+    protected $primaryKey = 'id_motor'; // 🔥 wajib
+
     protected $fillable = [
         'nama_motor',
         'harga',
@@ -18,5 +19,11 @@ class MotorListrik extends Model
         'waktu_pengisian',
         'kapasitas_baterai',
         'daya_maksimum',
+        'created_by', // 🔥 wajib kalau mau insert
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

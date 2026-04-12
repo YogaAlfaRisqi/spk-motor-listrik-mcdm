@@ -188,7 +188,7 @@ new #[Layout('layouts.guest')] #[Title('Register')] class extends Component
 
                     <!-- Logo -->
                     <a href="/" class="mb-6 block text-center text-5xl font-bold text-white dark:text-white">
-                        Welcome Back,
+                        Let's Join,
                     </a>
 
                     <!-- Headline -->

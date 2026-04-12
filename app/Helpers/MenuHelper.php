@@ -29,11 +29,11 @@ class MenuHelper
                 'path' => '/admin/weight',
             ],
             // [
-            [
-                'icon' => 'user-profile',
-                'name' => 'Nilai Alternatif',
-                'path' => '/admin/alternative-values',
-            ],
+            // [
+            //     'icon' => 'user-profile',
+            //     'name' => 'Nilai Alternatif',
+            //     'path' => '/admin/alternative-values',
+            // ],
 
             [
                 'icon' => 'user-profile',

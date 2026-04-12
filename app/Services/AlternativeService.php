@@ -2,18 +2,35 @@
 
 namespace App\Services;
 
+use App\Repositories\Interfaces\AlternativeRepositoryInterface;
+
 class AlternativeService
 {
-    private static array $alternatives = [
-       
-    ];
+    protected $alternativeRepository;
 
-    public static function getAllAlternatives()
+    public function __construct(AlternativeRepositoryInterface $alternativeRepository)
     {
-        return self::$alternatives;
+        $this->alternativeRepository = $alternativeRepository;
     }
-    public function getAlternativeById($id)
+
+    public function getAll()
     {
-        return collect(self::$alternatives)->firstWhere('id', $id);
+        return $this->alternativeRepository->getAll();
+    }
+    public function getById($id)
+    {
+        return $this->alternativeRepository->findById($id);
+    }
+    public function create(array $data)
+    {
+        return $this->alternativeRepository->store($data);
+    }
+    public function update($id, array $data)
+    {
+        return $this->alternativeRepository->update($id, $data);
+    }
+    public function delete($id)
+    {
+        return $this->alternativeRepository->delete($id);
     }
 }

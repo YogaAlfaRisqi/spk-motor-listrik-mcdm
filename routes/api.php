@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\AlternativeController;
+use App\Http\Controllers\API\AlternativeController;
 use App\Http\Controllers\API\CriteriaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

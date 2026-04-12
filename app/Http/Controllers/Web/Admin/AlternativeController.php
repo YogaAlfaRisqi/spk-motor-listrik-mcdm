@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\AlternativeService;
 use Illuminate\Http\Request;
 
 class AlternativeController extends Controller
 {
+    public function __construct(
+        protected AlternativeService $service
+    ){}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
-        return view('pages.alternatives.alternative-page', ['title' => 'Alternatives']);
+        $alternatives = $this->service->getAll();
+        $title = 'Alternatives';
+        return view('pages.alternatives.alternative-page', ['title' => $title, 'alternatives' => $alternatives]);
     }
 
     /**

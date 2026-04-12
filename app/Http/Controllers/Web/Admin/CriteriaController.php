@@ -36,7 +36,7 @@ class CriteriaController extends Controller
      */
     public function store(StoreCriteriaRequest $request)
     {
-        $this->service->store($request->validated());
+        // $this->service->store($request->validated());
 
         return redirect()
             ->route('admin.criteria.index')

@@ -22,8 +22,12 @@ class StoreAlternativeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'nama_alternatif' => 'required|string|max:255',
+            'nama_motor' => 'required|string',
+            'harga' => 'required|integer',
+            'jarak_tempuh' => 'required|integer',
+            'waktu_pengisian' => 'required|integer',
+            'kapasitas_baterai' => 'required|numeric',
+            'daya_maksimum' => 'required|numeric',
         ];
     }
 }

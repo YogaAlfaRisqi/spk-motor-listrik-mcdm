@@ -825,7 +825,7 @@
                 </h1>
 
                 <p class="hero-sub">
-                    Sistem Pendukung Keputusan menggunakan metode <strong style="color:var(--text)">MCDM (Multi-Criteria Decision Making)</strong> untuk menganalisis dan merekomendasikan motor listrik yang paling sesuai dengan kebutuhan dan anggaran Anda.
+                    Sistem Pendukung Keputusan menggunakan metode <strong style="color:var(--text)">TOPSIS</strong> untuk menganalisis dan merekomendasikan motor listrik yang paling sesuai dengan kebutuhan dan anggaran Anda.
                 </p>
 
                 <div class="hero-actions">
@@ -850,7 +850,7 @@
                     </div>
                     <div class="hero-stat">
                         <span class="num">4</span>
-                        <span class="label">Metode MCDM</span>
+                        <span class="label">Metode Pembobotan</span>
                     </div>
                 </div>
             </div>
@@ -926,7 +926,7 @@
 
                 <div class="float-card float-card-2">
                     <div class="float-label">Metode</div>
-                    <div class="float-value" style="font-size:0.85rem">MCDM</div>
+                    <div class="float-value" style="font-size:0.85rem">TOPSIS</div>
                 </div>
             </div>
         </div>

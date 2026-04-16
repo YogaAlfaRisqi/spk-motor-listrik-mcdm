@@ -43,6 +43,12 @@ class WeightController extends Controller
                 'color'   => 'orange',
                 'formula' => 'w_j = (1/n) × Σ_{k=r_j}^{n} (1/k)',
             ],
+            'compare' => [
+                'title'   => 'Perbandingan Metode',
+                'desc'    => 'Perbandingan hasil 4 metode pembobotan',
+                'color'   => 'orange',
+                'formula' => '-',
+            ],
         ];
 
         // Satu collection, dipakai bersama untuk view dan kalkulasi

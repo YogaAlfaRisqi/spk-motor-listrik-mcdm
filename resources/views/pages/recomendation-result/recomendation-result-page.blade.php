@@ -30,7 +30,9 @@
                 :alternatives="$alternatives"
                 :columns="$columns"
                 :criterias="$criterias"
-                :weights="$weights[$key] ?? collect()" />
+                :weights="$weights[$key] ?? collect()"
+                :method="$methods[$key] ?? null"
+                :comparisonData="$comparisonData ?? []" />
             @endforeach
         </div>
 
@@ -41,24 +43,64 @@
     function switchTab(tabName) {
         // Hide all tab contents
         const contents = document.querySelectorAll('.tab-content');
+
         contents.forEach(content => {
             content.classList.add('hidden');
+
+            // 🔥 RESET ALPINE STATE (INI KUNCI FIX BUG)
+            if (content.__x && content.__x.$data.reset) {
+                content.__x.$data.reset();
+            }
         });
 
         // Remove active class from all tabs
         const tabs = document.querySelectorAll('.tab-button');
         tabs.forEach(tab => {
-            tab.classList.remove('active', 'border-blue-500', 'text-blue-600', 'dark:border-blue-400', 'dark:text-blue-400');
-            tab.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300');
+            tab.classList.remove(
+                'active',
+                'border-blue-500',
+                'text-blue-600',
+                'dark:border-blue-400',
+                'dark:text-blue-400'
+            );
+
+            tab.classList.add(
+                'border-transparent',
+                'text-gray-500',
+                'hover:text-gray-700',
+                'hover:border-gray-300',
+                'dark:text-gray-400',
+                'dark:hover:text-gray-300'
+            );
         });
 
         // Show selected tab content
-        document.getElementById('content-' + tabName).classList.remove('hidden');
+        const activeContent = document.getElementById('content-' + tabName);
+        activeContent.classList.remove('hidden');
+
+        // 🔥 OPTIONAL: RESET TAB YANG DIBUKA (BIAR SELALU FRESH)
+        if (activeContent.__x && activeContent.__x.$data.reset) {
+            activeContent.__x.$data.reset();
+        }
 
         // Add active class to selected tab
         const activeTab = document.getElementById('tab-' + tabName);
-        activeTab.classList.add('active', 'border-blue-500', 'text-blue-600', 'dark:border-blue-400', 'dark:text-blue-400');
-        activeTab.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300');
+        activeTab.classList.add(
+            'active',
+            'border-blue-500',
+            'text-blue-600',
+            'dark:border-blue-400',
+            'dark:text-blue-400'
+        );
+
+        activeTab.classList.remove(
+            'border-transparent',
+            'text-gray-500',
+            'hover:text-gray-700',
+            'hover:border-gray-300',
+            'dark:text-gray-400',
+            'dark:hover:text-gray-300'
+        );
     }
 
     // Initialize first tab as active

@@ -1,71 +1,53 @@
+@props(['data'])
 
 <div class="overflow-x-auto">
-    <table class="min-w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden table-auto">
+    <table class="min-w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
 
         {{-- HEADER --}}
         <thead class="bg-gray-100 dark:bg-gray-800">
             <tr>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-200 w-12">
-                    No
-                </th>
-                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-700 dark:text-gray-200">
-                    Nama Motor
-                </th>
+                <th class="px-4 py-3 text-sm font-semibold text-left">No</th>
+                <th class="px-4 py-3 text-sm font-semibold text-left">Nama Motor</th>
 
-                @foreach($columns as $index => $col)
-                <th class="px-4 py-3 text-center text-sm font-semibold text-gray-700 dark:text-gray-200">
-                    C{{ $index + 1 }}
-                </th>
-                @endforeach
+                @if(!empty($data))
+                    @foreach(array_keys($data[0]['values']) as $index => $col)
+                        <th class="px-4 py-3 text-sm text-center font-semibold">
+                            C{{ $index + 1 }}
+                        </th>
+                    @endforeach
+                @endif
             </tr>
         </thead>
 
         {{-- BODY --}}
-        <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-            @forelse($alternatives as $a)
-            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition">
+        <tbody class="bg-white dark:bg-gray-900 divide-y">
 
-                {{-- NOMOR --}}
-                <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300">
+            @forelse($data as $row)
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+
+                <td class="px-4 py-3 text-sm">
                     {{ $loop->iteration }}
                 </td>
 
-                {{-- NAMA --}}
-                <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
-                    {{ $a->nama_motor }}
+                <td class="px-4 py-3 text-sm font-medium">
+                    {{ $row['nama_motor'] }}
                 </td>
 
-                {{-- NORMALISASI --}}
-                @foreach($columns as $index => $col)
-                @php
-                    $criteria = $criterias[$index] ?? null;
-                    $tipe = $criteria->tipe ?? 'benefit';
-                    $value = $a->$col ?? 0;
-
-                    $norm = 0;
-
-                    if ($tipe === 'benefit') {
-                        $norm = ($max[$col] ?? 0) != 0 ? $value / $max[$col] : 0;
-                    } else {
-                        $norm = $value != 0 ? ($min[$col] ?? 0) / $value : 0;
-                    }
-                @endphp
-
-                <td class="px-4 py-3 text-sm text-center text-gray-700 dark:text-gray-300">
-                    {{ number_format($norm, 3) }}
+                @foreach($row['values'] as $val)
+                <td class="px-4 py-3 text-sm text-center">
+                    {{ number_format($val, 11) }}
                 </td>
                 @endforeach
 
             </tr>
             @empty
             <tr>
-                <td colspan="{{ 2 + count($columns) }}"
-                    class="text-center py-6 text-gray-500 dark:text-gray-400">
+                <td colspan="100%" class="text-center py-6 text-gray-500">
                     Data tidak tersedia
                 </td>
             </tr>
             @endforelse
-        </tbody>
 
+        </tbody>
     </table>
-</div>
+</div>  

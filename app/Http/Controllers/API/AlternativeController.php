@@ -29,15 +29,35 @@ class AlternativeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(StoreAlternativeRequest $request)
+    // {
+    //     $data = $request->validated();
+
+    //     $data['created_by'] = 1; // sementara (nanti pakai auth()->id())
+
+    //     $alternative = $this->alternativeService->create($data);
+
+    //     return ApiResponse::success($alternative, 'Alternative created', 201);
+    // }
     public function store(StoreAlternativeRequest $request)
     {
-        $data = $request->validated();
+        $validated = $request->validated();
 
-        $data['created_by'] = 1; // sementara (nanti pakai auth()->id())
+        // Normalisasi: jika bukan batch, masukkan ke dalam array agar bisa di-loop
+        $isBatch = isset($validated[0]);
+        $items = $isBatch ? $validated : [$validated];
 
-        $alternative = $this->alternativeService->create($data);
+        $results = [];
 
-        return ApiResponse::success($alternative, 'Alternative created', 201);
+        foreach ($items as $item) {
+            $item['created_by'] = 1; // ID User sementara
+            $results[] = $this->alternativeService->create($item);
+        }
+
+        // Kembalikan semua data yang berhasil dibuat atau hanya satu jika bukan batch
+        $response = $isBatch ? $results : $results[0];
+
+        return ApiResponse::success($response, 'Data berhasil diproses', 201);
     }
 
     /**

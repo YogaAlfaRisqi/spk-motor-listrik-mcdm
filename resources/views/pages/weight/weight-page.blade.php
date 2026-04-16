@@ -31,7 +31,7 @@
                     :keyTab="$key"
                     :tab="$tab"
                     :criterias="$criterias"
-                    :weights="$weights[$key] ?? collect()" />
+                    :weights="$key === 'compare' ? $weights : ($weights[$key] ?? collect())" />
             @endforeach
         </div>
 

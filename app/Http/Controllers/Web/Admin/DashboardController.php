@@ -3,64 +3,62 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\AlternativeService;
+use App\Services\CriteriaService;
+use App\Services\SPK\CalculationService;
+use App\Services\SPK\WeightService;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        protected CriteriaService $criteriaService,
+        protected AlternativeService $alternativeService,
+        protected WeightService $weightService,
+        protected CalculationService $calculationService,
+    ) {}
+
     public function index()
     {
-        //
-        return view('pages.dashboard.welcome-page', ['title' => 'Dashboard']);
-    }
+        $columns = [
+            'harga',
+            'jarak_tempuh',
+            'waktu_pengisian',
+            'kapasitas_baterai',
+            'daya_maksimum'
+        ];
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // 🔥 ambil data
+        $criterias = $this->criteriaService->getAll();
+        $alternatives = $this->alternativeService->getAll();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // 🔥 KPI (SUMMARY)
+        $totalKriteria   = $criterias->count();
+        $totalAlternatif = $alternatives->count();
+        $totalUser       = User::count();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        // 🔥 bobot
+        $weights = $this->weightService->getAllMethods($criterias);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        // 🔥 hitung SPK
+        $result = $this->calculationService->calculate(
+            $alternatives,
+            $columns,
+            $criterias,
+            $weights
+        );
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        return view('pages.dashboard.welcome-page', [
+            'title'            => 'Dashboard',
+            'criterias'        => $criterias,
+            'alternatives'     =>$alternatives,
+            'weights'          =>$weights,
+            'comparisonData'   => $result['comparison'] ?? [],
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            // ✅ kirim ke view (KPI)
+            'totalKriteria'    => $totalKriteria,
+            'totalAlternatif'  => $totalAlternatif,
+            'totalUser'        => $totalUser,
+        ]);
     }
 }

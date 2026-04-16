@@ -123,7 +123,7 @@
                     Total (Σ)
                 </td>
                 <td class="px-4 py-3 text-center text-sm font-bold text-green-600 dark:text-green-400">
-                    {{ number_format((float) $weights->sum('bobot'), 10) }}
+                    {{ number_format(collect($weights)->sum(fn($w) => $w['bobot'] ?? 0), 10) }}
                 </td>
             </tr>
         </tfoot>

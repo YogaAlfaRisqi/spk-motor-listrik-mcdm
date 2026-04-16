@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\AlternativeService;
 use App\Services\CriteriaService;
+use App\Services\spk\CalculationService;
 use App\Services\spk\WeightService;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class RecomendationResultController extends Controller
         protected CriteriaService $criteriaService,
         protected AlternativeService $alternativeService,
         protected WeightService      $weightService,
+        protected CalculationService $calculationService,
     ) {}
     public function index()
     {
@@ -53,19 +55,41 @@ class RecomendationResultController extends Controller
                 'color' => 'orange',
                 'formula' => 'w_j = (1/n) × Σ(1/k)',
             ],
+            'compare' => [
+                'title' => 'Result Comparation',
+                'desc' => 'Metode ROC menggunakan pendekatan centroid.',
+                'color' => 'orange',
+                'formula' => '-',
+            ],
+
         ];
 
-        // Satu collection, dipakai bersama untuk view dan kalkulasi
+        // data
         $criterias = $this->criteriaService->getAll();
         $alternatives = $this->alternativeService->getAll();
+
+        // bobot
         $weights   = $this->weightService->getAllMethods($criterias);
+
+        // for calculation
+        // 🔥 HITUNG SPK (PAKAI BOBOT DARI ATAS)
+        $result = $this->calculationService->calculate(
+            $alternatives,
+            $columns,
+            $criterias,
+            $weights // 🔥 kirim bobot ke service
+        );
+        // per metode
+
         return view('pages.recomendation-result.recomendation-result-page', [
-            'title' => 'Hasil Rekomendasi', 
-            'alternatives' => $alternatives, 
-            'criterias' => $criterias, 
-            'columns' => $columns, 
+            'title' => 'Hasil Rekomendasi',
+            'alternatives' => $alternatives,
+            'criterias' => $criterias,
+            'columns' => $columns,
             'menuTabs' => $menuTabs,
-            'weights' => $weights
+            'weights' => $weights,
+            'methods' => $result['methods'],
+            'comparisonData' => $result['comparison'],
         ]);
     }
 

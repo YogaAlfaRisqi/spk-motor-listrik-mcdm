@@ -23,7 +23,7 @@
         "@fullcalendar/list": "^6.1.20",
         "@fullcalendar/timegrid": "^6.1.20",
         "alpinejs": "^3.15.8",
-        "apexcharts": "^5.10.3",
+        "apexcharts": "^5.10.6",
         "flatpickr": "^4.6.13",
         "jsvectormap": "^1.7.0",
         "prismjs": "^1.30.0",

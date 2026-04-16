@@ -57,7 +57,7 @@ new #[Layout('layouts.guest')] class extends Component
                                 <!-- Email -->
                                 <div>
                                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                                        Email
+                                        Email <span class="text-error-500">*</span>
                                     </label>
                                     <input
                                         type="email"
@@ -77,7 +77,7 @@ new #[Layout('layouts.guest')] class extends Component
                                     </label>
                                     <div x-data="{ showPassword: false }" class="relative">
                                         <input :type="showPassword ? 'text' : 'password'"
-                                            placeholder="Enter your password"
+                                            placeholder="Masukan password anda"
                                             wire:model.defer="form.password"
                                             class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                                             required />
@@ -122,7 +122,7 @@ new #[Layout('layouts.guest')] class extends Component
                             </div>
                         </form>
                         <div class="mt-5">
-                            <p class="text-center text-sm font-normal text-gray-700 sm:text-start dark:text-gray-400">
+                            <p class="text-center text-sm font-normal text-gray-700 sm:text-center dark:text-gray-400">
                                 Don't have an account?
                                 <a href="/register" class="text-brand-500 hover:text-brand-600 dark:text-brand-400">Sign Up</a>
                             </p>
@@ -147,48 +147,44 @@ new #[Layout('layouts.guest')] class extends Component
 
                     <!-- Headline -->
                     <h1 class="mb-3 text-2xl font-semibold text-white dark:text-white">
-                        Authentication Page <br> Rekomendasi Motor Listrik Terbaik
+                        Sistem Pendukung Keputusan Rekomendasi Motor Listrik
                     </h1>
 
                     <!-- Description -->
                     <p class="mb-6 text-sm text-gray-400 dark:text-white/60">
-                        Sistem Pendukung Keputusan berbasis metode MCDM untuk membantu Anda memilih motor listrik
+                        Berbasis Surrogate Weighting Procedures dan TOPSIS dengan 4 metode pembobotan untuk membantu Anda memilih motor listrik
                         terbaik sesuai kebutuhan, performa, dan budget.
                     </p>
 
                     <!-- Features / Value Points -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-300 dark:text-white/70">
 
-                        <!-- Item 1 -->
                         <div class="flex flex-col items-center text-center gap-2">
                             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-500/20">
                                 <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M3 17l6-6 4 4 8-8"></path>
+                                    <path d="M9 7h6m-6 4h6m-6 4h6M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <p>Multi Kriteria</p>
+                            <p>4 Metode Pembobotan</p>
                         </div>
 
-                        <!-- Item 2 -->
                         <div class="flex flex-col items-center text-center gap-2">
                             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/20">
                                 <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M12 8v4l3 3"></path>
-                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32l2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M18.42 5.58l2.12-2.12"></path>
                                 </svg>
                             </div>
-                            <p>Rekomendasi Otomatis</p>
+                            <p>Akurasi TOPSIS</p>
                         </div>
 
-                        <!-- Item 3 -->
                         <div class="flex flex-col items-center text-center gap-2">
                             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/20">
                                 <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path d="M9 17v-6h13"></path>
-                                    <path d="M9 11l-4 4 4 4"></path>
+                                    <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.673.337a4 4 0 01-1.789.427h-2.7a2 2 0 01-1.414-.586L4.5 14a2 2 0 010-2.828l.707-.707a2 2 0 011.414-.586h.086c.26 0 .52.05.762.147L10 11M12 3v1m0 16v1m8-9h1M3 12h1m15.07-7.07l-.707.707M6.34 17.66l-.707.707M6.34 6.34l.707.707m10.61 10.61l.707.707"></path>
                                 </svg>
                             </div>
-                            <p>Analisis Cepat</p>
+                            <p>Rekomendasi Cerdas</p>
                         </div>
                     </div>
                 </div>

@@ -11,16 +11,26 @@
     </div>
 
     {{-- Formula Box --}}
+    @if($keyTab !== 'compare')
     <x-spk.formula-box
         :formula="$tab['formula'] ?? ''"
         :color="$tab['color'] ?? 'blue'"
         :desc="$tab['desc'] ?? ''" />
+    @endif
 
-    {{-- Tabel Bobot --}}
-    <x-spk.table-bobot
-        :criterias="$criterias"
-        :weights="$weights"
-        :showReciprocal="$keyTab === 'rr'"
-        :showSumTerm="$keyTab === 'roc'" />
+    {{-- TABLE --}}
+    @if($keyTab === 'compare')
+        <x-spk.table-weight-comparation
+            :criterias="$criterias"
+            :weights="$weights"
+        />
+    @else
+        <x-spk.table-bobot
+            :criterias="$criterias"
+            :weights="$weights"
+            :showReciprocal="$keyTab === 'rr'"
+            :showSumTerm="$keyTab === 'roc'"
+        />
+    @endif
 
 </div>

@@ -41,14 +41,14 @@ new #[Layout('layouts.guest')] class extends Component
 
         <!-- LEFT SIDE (FORM) -->
         <div class="flex w-full flex-1 flex-col lg:w-1/2">
-            
+
             <!-- Back -->
             <div class="mx-auto w-full max-w-md pt-10">
                 <a href="{{ route('login') }}"
                     wire:navigate
                     class="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
                     <svg class="stroke-current" width="20" height="20" fill="none">
-                        <path d="M12.7083 5L7.5 10.2083L12.7083 15.4167" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.7083 5L7.5 10.2083L12.7083 15.4167" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     Back to login
                 </a>
@@ -85,10 +85,9 @@ new #[Layout('layouts.guest')] class extends Component
                                    focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none
                                    dark:border-gray-700 dark:bg-gray-900 dark:text-white"
                             placeholder="Masukkan email"
-                            required
-                        >
+                            required>
                         @error('email')
-                            <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -129,12 +128,12 @@ new #[Layout('layouts.guest')] class extends Component
 
                     <!-- Headline -->
                     <h1 class="mb-3 text-2xl font-semibold text-white dark:text-white">
-                        Authentication Page <br> Rekomendasi Motor Listrik Terbaik
+                        Sistem Pendukung Keputusan Rekomendasi Motor Listrik Terbaik
                     </h1>
 
                     <!-- Description -->
                     <p class="mb-6 text-sm text-gray-400 dark:text-white/60">
-                        Sistem Pendukung Keputusan berbasis metode MCDM untuk membantu Anda memilih motor listrik
+                        Berbasis metode TOPSIS dengan 4 metode pembobotan untuk membantu Anda memilih motor listrik
                         terbaik sesuai kebutuhan, performa, dan budget.
                     </p>
 
@@ -192,5 +191,3 @@ new #[Layout('layouts.guest')] class extends Component
 
     </div>
 </div>
-
-

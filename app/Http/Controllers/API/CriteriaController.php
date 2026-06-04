@@ -33,7 +33,7 @@ class CriteriaController extends Controller
 
     public function store(StoreCriteriaRequest $request)
     {
-        $data = $this->criteriaService->create($request->validated());
+        $data = $this->criteriaService->store($request->validated());
 
         return ApiResponse::success($data, 'Criteria created', 201);
     }

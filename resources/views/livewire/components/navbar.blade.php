@@ -1,267 +1,201 @@
 <style>
-/* ===== NAVBAR ===== */
-.nav-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    padding: 0 24px;
-}
+    /* ===== NAVBAR CSS ===== */
+    .nav-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 0 24px;
+    }
 
-.nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-    position: relative;
-}
+    .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 0;
+        position: relative;
+    }
 
-.nav-inner::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(200, 241, 53, 0.2), transparent);
-}
+    .nav-bg {
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 12, 15, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: -1;
+    }
 
-.nav-bg {
-    position: absolute;
-    inset: 0;
-    background: rgba(10, 12, 15, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    z-index: -1;
-}
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+    }
 
-/* Logo */
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .logo-icon {
+        width: 38px;
+        height: 38px;
+        background: #C8F135;
+        /* var(--lime) fallback */
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.logo-icon {
-    width: 38px;
-    height: 38px;
-    background: var(--lime);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
+    .logo-text {
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: #FFFFFF;
+        font-family: 'Syne', sans-serif;
+    }
 
-.logo-icon svg {
-    width: 22px;
-    height: 22px;
-}
+    .logo-text span {
+        color: #C8F135;
+    }
 
-.logo-text {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--white);
-    letter-spacing: -0.02em;
-}
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
-.logo-text span {
-    color: var(--lime);
-}
+    .nav-link {
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #A0A0A0;
+        transition: all 0.2s ease;
+    }
 
-/* Nav Links */
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    list-style: none;
-}
+    .nav-link:hover,
+    .nav-link.active {
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.05);
+    }
 
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-soft);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid transparent;
-    background: none;
-    white-space: nowrap;
-}
+    .nav-link.active {
+        color: #C8F135;
+        background: rgba(200, 241, 53, 0.1);
+    }
 
-.nav-link:hover {
-    color: var(--text);
-    background: var(--dark-3);
-    border-color: rgba(255,255,255,0.06);
-}
+    .nav-cta {
+        background: #C8F135;
+        color: #0A0C0F;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 
-.nav-link.active {
-    color: var(--lime);
-    background: rgba(200, 241, 53, 0.08);
-    border-color: rgba(200, 241, 53, 0.2);
-}
+    /* Mobile Hamburger */
+    .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
 
-.nav-link svg {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-}
+    .nav-hamburger span {
+        width: 24px;
+        height: 2px;
+        background: white;
+        transition: 0.3s;
+    }
 
-/* CTA Button */
-.nav-cta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: var(--lime);
-    color: var(--dark);
-    border-radius: var(--radius-sm);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.875rem;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-    text-decoration: none;
-}
+    .nav-mobile {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #14161A;
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.nav-cta:hover {
-    background: var(--lime-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(200, 241, 53, 0.25);
-}
+    .nav-mobile.active {
+        display: flex;
+    }
 
-.nav-cta svg { width: 16px; height: 16px; }
+    @media (max-width: 768px) {
 
-/* Mobile Hamburger */
-.nav-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-    background: none;
-    border: none;
-}
+        .nav-links,
+        .nav-cta.desktop-only {
+            display: none;
+        }
 
-.nav-hamburger span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* Mobile Menu */
-.nav-mobile {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 24px;
-    right: 24px;
-    background: var(--dark-2);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: var(--radius);
-    padding: 8px;
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    animation: slideDown 0.2s ease forwards;
-    z-index: 999;
-}
-
-.nav-mobile.open { display: flex; }
-@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-
-.nav-mobile .nav-link { width: 100%; justify-content: flex-start; padding: 12px 16px; }
-.nav-mobile .nav-cta { margin-top: 4px; justify-content: center; }
-
-@media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .nav-hamburger { display: flex; }
-}
+        .nav-hamburger {
+            display: flex;
+        }
+    }
 </style>
 
-<nav class="nav-wrapper" x-data>
+<nav class="nav-wrapper">
     <div class="nav-bg"></div>
     <div class="nav-inner">
         {{-- Logo --}}
-        <div class="nav-logo" wire:click="navigate('home')">
+        <a href="" class="nav-logo">
             <div class="logo-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#0A0C0F" stroke="#0A0C0F" stroke-width="1.5" stroke-linejoin="round"/>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#0A0C0F" stroke="#0A0C0F" stroke-width="1.5" stroke-linejoin="round" />
                 </svg>
             </div>
             <span class="logo-text">SPK<span>Motor Listrik</span></span>
-        </div>
+        </a>
 
         {{-- Desktop Nav --}}
         <ul class="nav-links">
+            <li><a href="/home">Beranda</a></li>
+            <li><a href="#how-it-works" class="nav-link {{ request()->is('how-it-works*') ? 'active' : '' }}">Cara Kerja</a></li>
+            <li><a href="#about" class="nav-link {{ request()->is('about*') ? 'active' : '' }}">Tentang</a></li>
             <li>
-                <button class="nav-link {{ $currentPage === 'home' ? 'active' : '' }}" wire:click="navigate('home')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    Beranda
-                </button>
-            </li>
-            <li>
-                <button class="nav-link {{ $currentPage === 'how-it-works' ? 'active' : '' }}" wire:click="navigate('how-it-works')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                    Cara Kerja
-                </button>
-            </li>
-            <li>
-                <button class="nav-link {{ $currentPage === 'about' ? 'active' : '' }}" wire:click="navigate('about')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    Tentang
-                </button>
-            </li>
-            <li>
-                <button class="nav-link {{ $currentPage === 'about' ? 'active' : '' }}" wire:click="navigate('about')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <a href="{{ route('motor') }}"
+                    class="nav-link {{ request()->routeIs('motor') ? 'active' : '' }}">
                     Motor
-                </button>
+                </a>
             </li>
         </ul>
 
         {{-- CTA --}}
-        <button class="nav-cta" wire:click="navigate('recommendation')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+        <a href="" class="nav-cta desktop-only">
             Mulai Analisis
-        </button>
+        </a>
 
-        {{-- Mobile Hamburger --}}
-        <button class="nav-hamburger" wire:click="toggleMobile" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        {{-- Hamburger --}}
+        <button class="nav-hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
         </button>
     </div>
 
     {{-- Mobile Menu --}}
-    <div class="nav-mobile {{ $mobileOpen ? 'open' : '' }}">
-        <button class="nav-link {{ $currentPage === 'home' ? 'active' : '' }}" wire:click="navigate('home')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Beranda
-        </button>
-        <button class="nav-link {{ $currentPage === 'how-it-works' ? 'active' : '' }}" wire:click="navigate('how-it-works')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Cara Kerja
-        </button>
-        <button class="nav-link {{ $currentPage === 'about' ? 'active' : '' }}" wire:click="navigate('about')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/></svg> Tentang
-        </button>
-        <button class="nav-cta" wire:click="navigate('recommendation')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
-            Mulai Analisis
-        </button>
+    <div class="nav-mobile" id="mobileMenu">
+        <a href="#home" class="nav-link">Beranda</a>
+        <a href="#how-it-works" class="nav-link">Cara Kerja</a>
+        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#motor" class="nav-link">Motor</a>
+        <a href="" class="nav-cta">Mulai Analisis</a>
     </div>
 </nav>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.toggle('active');
+    }
+</script>

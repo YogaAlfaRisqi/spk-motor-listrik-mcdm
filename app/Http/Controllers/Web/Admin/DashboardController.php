@@ -29,8 +29,8 @@ class DashboardController extends Controller
         ];
 
         // 🔥 ambil data
-        $criterias = $this->criteriaService->getAll();
-        $alternatives = $this->alternativeService->getAll();
+        $criterias = $this->criteriaService->getCollection();
+        $alternatives = $this->alternativeService->getCollection();
 
         // 🔥 KPI (SUMMARY)
         $totalKriteria   = $criterias->count();

@@ -17,6 +17,12 @@ class AlternativeService
     {
         return $this->alternativeRepository->getAll();
     }
+
+    public function getCollection()
+    {
+        return $this->alternativeRepository->getCollection();
+    }
+
     public function getById($id)
     {
         return $this->alternativeRepository->findById($id);

@@ -131,11 +131,8 @@
         </div>
 
 
-        <!-- Global Modal Component -->
-        @include('common.global-modal')
-
     </div>
-
+    @stack('modals')
     @livewireScripts
 
 </body>

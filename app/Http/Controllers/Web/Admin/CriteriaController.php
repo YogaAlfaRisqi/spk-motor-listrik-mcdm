@@ -6,76 +6,55 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCriteriaRequest;
 use App\Http\Requests\UpdateCriteriaRequest;
 use App\Services\CriteriaService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CriteriaController extends Controller
 {
     public function __construct(
         protected CriteriaService $service
-    ){}
+    ) {}
 
-    public function index()
+    public function index(Request $request): View
     {
-        //
-        $criterias = $this->service->getAll();
-        $title = 'Criteria';
-        return view('pages.criteria.criteria-management', compact('criterias','title'));
+        $search = $request->string('search')->toString();
+        $perPage = (int) $request->input('per_page', 5);
+
+        $criterias = $this->service->getAll($search, $perPage);
+
+        return view('pages.criteria.criteria-management', [
+            'criterias' => $criterias,
+            'search' => $search,
+            'per_page' => $perPage,
+        ]);
     }
 
-     /**
-     * Show form create
-     */
-    public function create()
+    public function store(StoreCriteriaRequest $request): RedirectResponse
     {
-        $title = 'Tambah Kriteria';
-        return view('admin.criterias.create', compact('title'));
-    }
-
-    /**
-     * Store new data
-     */
-    public function store(StoreCriteriaRequest $request)
-    {
-        // $this->service->store($request->validated());
+        $this->service->store($request->validated());
 
         return redirect()
             ->route('admin.criteria.index')
-            ->with('success', 'Data kriteria berhasil ditambahkan');
+            ->with('success', 'Data kriteria berhasil ditambahkan.');
     }
 
-    /**
-     * Show form edit
-     */
-    public function edit($id)
+    public function update(UpdateCriteriaRequest $request, int $id): RedirectResponse
     {
-        $criteria = $this->service->find($id);
-        $title = 'Edit Kriteria';
-
-        return view('admin.criterias.edit', compact('criteria', 'title'));
-    }
-
-    /**
-     * Update data
-     */
-    public function update(UpdateCriteriaRequest $request, $id)
-    {
+        // dd($id, $request->validated());
         $this->service->update($id, $request->validated());
 
         return redirect()
             ->route('admin.criteria.index')
-            ->with('success', 'Data kriteria berhasil diperbarui');
+            ->with('success', 'Data kriteria berhasil diperbarui.');
     }
 
-    /**
-     * Delete data
-     */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $this->service->delete($id);
+
         return redirect()
-            ->back()
-            ->with('success', 'Data kriteria berhasil dihapus');
+            ->route('admin.criteria.index')
+            ->with('success', 'Data kriteria berhasil dihapus.');
     }
 }
-
-

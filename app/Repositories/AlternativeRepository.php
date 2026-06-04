@@ -14,6 +14,11 @@ class AlternativeRepository implements AlternativeRepositoryInterface
         return MotorListrik::orderBy('id_motor')->get();
     }
 
+    public function getCollection(?string $search = null): Collection
+    {
+        return MotorListrik::orderBy('id_motor')->get();
+    }
+    
     public function findById(int $id_motor): ?MotorListrik
     {
         // todo: To find alternative by ID from database

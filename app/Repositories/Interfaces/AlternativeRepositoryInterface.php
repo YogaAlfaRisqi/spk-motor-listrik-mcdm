@@ -9,6 +9,8 @@ interface AlternativeRepositoryInterface
 {
     public function getAll(): Collection;
 
+    public function getCollection(?string $search = null): Collection;
+
     public function findById(int $id_motor): ?MotorListrik;
 
     public function store(array $data): MotorListrik;

@@ -2,39 +2,45 @@
 
 namespace App\Services;
 
+use App\Models\Criteria;
 use App\Repositories\Interfaces\CriteriaRepositoryInterface;
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class CriteriaService
 {
-    protected $criteriaRepository;
+    public function __construct(
+        protected CriteriaRepositoryInterface $criteriaRepository
+    ) {}
 
-    public function __construct(CriteriaRepositoryInterface $criteriaRepository)
+    public function getAll(?string $search = null, int $perPage = 5): LengthAwarePaginator
     {
-        $this->criteriaRepository = $criteriaRepository;
+        return $this->criteriaRepository->getAll($search, $perPage);
     }
 
-    public function getAll()
+    // Untuk kebutuhan collection murni (Dashboard, SPK calculation, dll)
+    public function getCollection(?string $search = null): Collection
     {
-        return $this->criteriaRepository->getAll();
+        return $this->criteriaRepository->getCollection($search);
     }
 
-    public function getById(int $id)
+
+    public function getById(int $id): ?Criteria
     {
         return $this->criteriaRepository->findById($id);
     }
 
-    public function create(array $data)
+    public function store(array $data): Criteria
     {
         return $this->criteriaRepository->store($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): Criteria
     {
         return $this->criteriaRepository->update($id, $data);
     }
 
-    public function delete(int $id)
+    public function delete(int $id): bool
     {
         return $this->criteriaRepository->delete($id);
     }

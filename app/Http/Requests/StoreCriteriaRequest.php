@@ -11,22 +11,63 @@ class StoreCriteriaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return true; // Set sesuai dengan authorization logic Anda
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'kode_kriteria' => 'required|string|max:10',
-            'nama_kriteria' => 'required|string|max:255',
-            'keterangan' => 'nullable|string',
-            'skala_penilaian' => 'required|string|max:255',
-            'tipe' => 'required|in:benefit,cost'
+            'kode_kriteria' => [
+                'required',
+                'string',
+                'max:20',
+                'unique:criterias,kode_kriteria'
+            ],
+            'nama_kriteria' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'keterangan' => [
+                'nullable',
+                'string',
+                'max:1000'
+            ],
+            'skala_penilaian' => [
+                'nullable',
+                'string',
+                'max:100'
+            ],
+            'tipe' => [
+                'required',
+                'string',
+                'in:benefit,cost'
+            ]
         ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     */
+    public function messages(): array
+    {
+        return [
+            'kode_kriteria.required' => 'Kode kriteria harus diisi',
+            'kode_kriteria.unique' => 'Kode kriteria sudah terdaftar',
+            'nama_kriteria.required' => 'Nama kriteria harus diisi',
+            'tipe.required' => 'Tipe kriteria harus dipilih',
+            'tipe.in' => 'Tipe kriteria tidak valid',
+        ];
+    }
+
+    /**
+     * Get the attributes that should be returned by default.
+     */
+    protected function getRedirectUrl()
+    {
+        return $this->redirectTo ?? url('/');
     }
 }

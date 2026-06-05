@@ -7,7 +7,7 @@
             <!-- Header -->
             <div class="flex flex-col gap-2 px-5 mb-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Latest Criteria</h3>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Latest User</h3>
                 </div>
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <form>
@@ -22,7 +22,7 @@
                     </form>
 
                     <!-- ADD BUTTON -->
-                    <button wire:click="create"
+                    <button id="btnAddUser"
                         class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition">
 
                         <!-- PLUS ICON -->
@@ -78,8 +78,12 @@
                                     <div class="flex justify-center gap-3">
 
                                         <!-- EDIT -->
-                                        <a href=""
-                                            class="p-2 rounded-lg hover:bg-blue-50 text-blue-500 hover:text-blue-700 transition">
+                                        <button type="button" class="btn-edit p-2 rounded-lg hover:bg-blue-50 text-blue-500 hover:text-blue-700 transition"
+                                            data-id="{{ $user->id }}"
+                                            data-name="{{ $user->name }}"
+                                            data-email="{{ $user->email }}"
+                                            data-role="admin"
+                                            data-update-url="{{ route('admin.users.update', $user->id) }}">
 
                                             <!-- Pencil Icon -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -87,26 +91,20 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M11 5h2m-1-1v2m-6 9l9-9 3 3-9 9H5v-3z" />
                                             </svg>
-                                        </a>
+                                        </button>
 
                                         <!-- DELETE -->
-                                        <form action=""
-                                            method="POST"
-                                            onsubmit="return confirm('Yakin hapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
+                                        <button type="button" class="btn-delete p-2 rounded-lg hover:bg-red-50 text-red-500 hover:text-red-700 transition"
+                                            data-name="{{ $user->name }}"
+                                            data-delete-url="{{ route('admin.users.destroy', $user->id) }}">
 
-                                            <button type="submit"
-                                                class="p-2 rounded-lg hover:bg-red-50 text-red-500 hover:text-red-700 transition">
-
-                                                <!-- Trash Icon -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M6 7h12M9 7V4h6v3m-7 4v6m4-6v6m4-6v6M5 7h14l-1 14H6L5 7z" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                            <!-- Trash Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 7h12M9 7V4h6v3m-7 4v6m4-6v6m4-6v6M5 7h14l-1 14H6L5 7z" />
+                                            </svg>
+                                        </button>
 
                                     </div>
                                 </td>
@@ -127,3 +125,100 @@
     </div>
     </div>
     @endsection
+
+
+    @push('modals')
+    @include('pages.user.partials.form-modal')
+    @include('pages.user.partials.delete-modal')
+@endpush
+
+@push('scripts')
+<script>
+    const formModal   = document.getElementById('userModal');
+    const deleteModal = document.getElementById('deleteUserModal');
+
+    const btnAdd        = document.getElementById('btnAddUser');
+    const btnCloseForm  = document.getElementById('closeUserModal');
+    const btnCancelForm = document.getElementById('cancelUserModal');
+
+    const form        = document.getElementById('userForm');
+    const title       = document.getElementById('userModalTitle');
+    const methodField = document.getElementById('userMethod');
+    const idField     = document.getElementById('userId');
+
+    const name     = document.getElementById('name');
+    const email    = document.getElementById('email');
+    const password = document.getElementById('password');
+    const role     = document.getElementById('role');
+
+    const deleteForm   = document.getElementById('deleteUserForm');
+    const deleteName   = document.getElementById('deleteUserName');
+    const btnCloseDelete  = document.getElementById('closeDeleteUserModal');
+    const btnCancelDelete = document.getElementById('cancelDeleteUserModal');
+
+    const openFormModal = () => {
+        formModal.classList.remove('hidden');
+        formModal.classList.add('flex');
+    };
+
+    const closeFormModal = () => {
+        form.reset();
+        form.action       = "{{ route('admin.users.store') }}";
+        methodField.value = 'POST';
+        idField.value     = '';
+        title.textContent = 'Tambah User';
+        formModal.classList.add('hidden');
+        formModal.classList.remove('flex');
+    };
+
+    const openDeleteModal = () => {
+        deleteModal.classList.remove('hidden');
+        deleteModal.classList.add('flex');
+    };
+
+    const closeDeleteModal = () => {
+        deleteModal.classList.add('hidden');
+        deleteModal.classList.remove('flex');
+    };
+
+    btnAdd?.addEventListener('click', openFormModal);
+    btnCloseForm?.addEventListener('click', closeFormModal);
+    btnCancelForm?.addEventListener('click', closeFormModal);
+
+    document.querySelectorAll('.btn-edit').forEach(button => {
+        button.addEventListener('click', function () {
+            title.textContent = 'Edit User';
+            form.action       = this.dataset.updateUrl;
+            methodField.value = 'PUT';
+            idField.value     = this.dataset.id;
+
+            name.value     = this.dataset.name     || '';
+            email.value    = this.dataset.email    || '';
+            password.value = '';
+            role.value     = this.dataset.role     || '';
+
+            openFormModal();
+        });
+    });
+
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function () {
+            deleteName.textContent = this.dataset.name || '-';
+            deleteForm.action      = this.dataset.deleteUrl;
+            openDeleteModal();
+        });
+    });
+
+    btnCloseDelete?.addEventListener('click', closeDeleteModal);
+    btnCancelDelete?.addEventListener('click', closeDeleteModal);
+
+    [formModal, deleteModal].forEach(modal => {
+        modal?.addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeFormModal();
+                closeDeleteModal();
+            }
+        });
+    });
+</script>
+@endpush

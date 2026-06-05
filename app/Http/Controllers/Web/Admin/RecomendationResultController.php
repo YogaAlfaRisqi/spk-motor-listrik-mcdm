@@ -65,8 +65,8 @@ class RecomendationResultController extends Controller
         ];
 
         // data
-        $criterias = $this->criteriaService->getAll();
-        $alternatives = $this->alternativeService->getAll();
+        $criterias = $this->criteriaService->getCollection();
+        $alternatives = $this->alternativeService->getCollection();
 
         // bobot
         $weights   = $this->weightService->getAllMethods($criterias);

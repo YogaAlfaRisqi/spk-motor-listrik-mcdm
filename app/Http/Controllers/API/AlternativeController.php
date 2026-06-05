@@ -17,28 +17,12 @@ class AlternativeController extends Controller
         $this->alternativeService = $alternativeService;
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data = $this->alternativeService->getAll();
         return ApiResponse::success($data, 'Alternatives list retrieved');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(StoreAlternativeRequest $request)
-    // {
-    //     $data = $request->validated();
-
-    //     $data['created_by'] = 1; // sementara (nanti pakai auth()->id())
-
-    //     $alternative = $this->alternativeService->create($data);
-
-    //     return ApiResponse::success($alternative, 'Alternative created', 201);
-    // }
     public function store(StoreAlternativeRequest $request)
     {
         $validated = $request->validated();

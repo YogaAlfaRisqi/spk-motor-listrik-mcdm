@@ -7,33 +7,7 @@
 
 <div class="space-y-6">
     <div class="rounded-2xl border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
-        <div class="flex flex-col gap-2 px-5 mb-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-            <div>
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">Latest Criteria</h3>
-            </div>
-
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <form method="GET" action="{{ route('admin.criteria.index') }}">
-                    <div class="relative">
-                        <input
-                            type="text"
-                            name="search"
-                            value="{{ request('search') }}"
-                            placeholder="Search..."
-                            class="h-[42px] w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pl-4 pr-4 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-blue-800 xl:w-[300px]"
-                        />
-                    </div>
-                </form>
-
-                <button type="button" id="btnAddCriteria"
-                    class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                    Tambah Data
-                </button>
-            </div>
-        </div>
+        @include('pages.criteria.partials.header')
 
         <div class="overflow-hidden">
             <div class="max-w-full px-5 overflow-x-auto">
@@ -50,45 +24,9 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse ($criterias as $criteria)
-                            <tr>
-                                <td class="px-4 py-4 whitespace-nowrap font-semibold">{{ $criteria->kode_kriteria }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $criteria->nama_kriteria }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $criteria->keterangan }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $criteria->skala_penilaian ?? '-' }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">
-                                    <span class="px-3 py-1 text-xs font-semibold rounded-full
-                                        {{ $criteria->tipe === 'benefit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
-                                        {{ ucfirst($criteria->tipe) }}
-                                    </span>
-                                </td>
-                                <td class="px-4 py-4 whitespace-nowrap">
-                                    <div class="flex items-center gap-3">
-                                        <button
-                                            type="button"
-                                            class="btn-edit p-2 rounded-lg hover:bg-blue-50 text-blue-500 hover:text-blue-700 transition"
-                                            data-id="{{ $criteria->id_kriteria }}"
-                                            data-kode="{{ $criteria->kode_kriteria }}"
-                                            data-nama="{{ $criteria->nama_kriteria }}"
-                                            data-keterangan="{{ $criteria->keterangan }}"
-                                            data-satuan="{{ $criteria->skala_penilaian }}"
-                                            data-tipe="{{ $criteria->tipe }}"
-                                            data-update-url="{{ route('admin.criteria.update', $criteria->id_kriteria) }}"
-                                        >✎</button>
-
-                                        <button
-                                            type="button"
-                                            class="btn-delete p-2 rounded-lg hover:bg-red-50 text-red-500 hover:text-red-700 transition"
-                                            data-id="{{ $criteria->id_kriteria }}"
-                                            data-name="{{ $criteria->nama_kriteria }}"
-                                            data-delete-url="{{ route('admin.criteria.destroy', $criteria->id_kriteria) }}"
-                                        >🗑</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @include('pages.criteria.partials.table-row', ['criteria' => $criteria])
                         @empty
-                            <tr>
-                                <td colspan="6" class="text-center py-6 text-gray-500">Data kriteria belum tersedia</td>
-                            </tr>
+                            @include('pages.criteria.partials.empty-state')
                         @endforelse
                     </tbody>
                 </table>

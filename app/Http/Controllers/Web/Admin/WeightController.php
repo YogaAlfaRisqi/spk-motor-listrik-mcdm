@@ -52,7 +52,7 @@ class WeightController extends Controller
         ];
 
         // Satu collection, dipakai bersama untuk view dan kalkulasi
-        $criterias = $this->criteriaService->getAll();
+        $criterias = $this->criteriaService->getCollection();
         $weights   = $this->weightService->getAllMethods($criterias);
 
         return view('pages.weight.weight-page', [

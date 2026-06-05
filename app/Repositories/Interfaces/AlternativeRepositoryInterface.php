@@ -4,10 +4,11 @@ namespace App\Repositories\Interfaces;
 
 use App\Models\MotorListrik;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 interface AlternativeRepositoryInterface
 {
-    public function getAll(): Collection;
+    public function getAll(?string $search = null, int $perPage = 5): LengthAwarePaginator;
 
     public function getCollection(?string $search = null): Collection;
 

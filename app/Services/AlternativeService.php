@@ -13,9 +13,9 @@ class AlternativeService
         $this->alternativeRepository = $alternativeRepository;
     }
 
-    public function getAll()
+    public function getAll(?string $search = null, int $perPage = 5)
     {
-        return $this->alternativeRepository->getAll();
+        return $this->alternativeRepository->getAll($search, $perPage);
     }
 
     public function getCollection()
@@ -27,7 +27,7 @@ class AlternativeService
     {
         return $this->alternativeRepository->findById($id);
     }
-    public function create(array $data)
+    public function store(array $data)
     {
         return $this->alternativeRepository->store($data);
     }

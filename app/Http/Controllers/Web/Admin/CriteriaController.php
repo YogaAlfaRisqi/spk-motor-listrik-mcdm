@@ -41,7 +41,6 @@ class CriteriaController extends Controller
 
     public function update(UpdateCriteriaRequest $request, int $id): RedirectResponse
     {
-        // dd($id, $request->validated());
         $this->service->update($id, $request->validated());
 
         return redirect()

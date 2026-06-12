@@ -31,17 +31,14 @@ $cards = [
   <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 
       p-6 md:p-8 rounded-2xl border border-gray-200/70 dark:border-gray-800 
       bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-950 shadow-sm">
-
     <div>
       <h1 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
         Dashboard SPK ⚡
       </h1>
-
       <p class="text-sm md:text-base text-gray-500 dark:text-gray-400">
         Analisis & Rekomendasi Motor Listrik berbasis Surrogate Weighting Procedures dan TOPSIS   
       </p>
     </div>
-
     <div class="px-4 py-2 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 
         text-white text-sm font-semibold shadow-md">
       Admin {{ Auth::user()->name }}
@@ -49,14 +46,12 @@ $cards = [
 
   </div>
 
-
   {{-- ================= KPI ================= --}}
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
     @foreach($cards as $card)
       <x-common.statistic-card :card="$card" />
     @endforeach
   </div>
-
 
   {{-- ================= MAIN GRID ================= --}}
   <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">

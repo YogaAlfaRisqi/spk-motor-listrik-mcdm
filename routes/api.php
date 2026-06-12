@@ -15,21 +15,9 @@ Route::get('/', function () {
 
 // Route fro criteria
 Route::apiResource('criteria',CriteriaController::class);
- 
-// // Route for weight
-// Route::apiResource('weights', WeightController::class);
 
 // Route for alternative
 Route::apiResource('alternative', AlternativeController::class);
-
-// // Route for calculation
-// Route::apiResource('calculations', CalculationController::class);
-
-// // Route for weighted comparasion
-// Route::apiResource('weighted-comparisons', WeightedComparisonController::class);
-
-// // Route for ranking comparation
-// Route::apiResource('ranking-comparisons', RankingComparisonController::class);
 
 // Route for user
 Route::get('/user', function (Request $request) {

@@ -15,24 +15,6 @@ use App\Http\Controllers\Web\Public\MotorController;
 // public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/motor', [MotorController::class, 'index'])->name('motor');
-// Route::get('/', function () {
-//     return view('pages.home');
-// })->name('home');
-// Route::get('/motor', function () {
-//     return view('livewire.pages.motor-page');
-// });
-
-// Route::get('/cara-kerja', function () {
-//     return view('pages.how-it-works');
-// })->name('how-it-works');
- 
-// Route::get('/tentang', function () {
-//     return view('pages.about');
-// })->name('about');
- 
-// Route::get('/rekomendasi', function () {
-//     return view('pages.recommendation');
-// })->name('recommendation');
 
 // Admin Routes
 Route::middleware(['auth'])
@@ -49,8 +31,6 @@ Route::middleware(['auth'])
 
         Route::view('profile', 'profile')
             ->name('profile');
-        // Route::get('criteria', KriteriaPage::class)->name('criteria');
-        
     });
 
 require __DIR__ . '/auth.php';

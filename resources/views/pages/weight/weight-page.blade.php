@@ -69,3 +69,7 @@
     document.addEventListener('DOMContentLoaded', () => switchTab('ew'));
 </script>
 @endsection
+
+
+
+

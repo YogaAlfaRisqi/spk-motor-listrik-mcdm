@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Web\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Services\AlternativeService;
 use App\Services\CriteriaService;
@@ -63,14 +61,11 @@ class RecomendationResultController extends Controller
             ],
 
         ];
-
         // data
         $criterias = $this->criteriaService->getCollection();
         $alternatives = $this->alternativeService->getCollection();
-
         // bobot
         $weights   = $this->weightService->getAllMethods($criterias);
-
         // for calculation
         // 🔥 HITUNG SPK (PAKAI BOBOT DARI ATAS)
         $result = $this->calculationService->calculate(
@@ -80,7 +75,6 @@ class RecomendationResultController extends Controller
             $weights // 🔥 kirim bobot ke service
         );
         // per metode
-
         return view('pages.recomendation-result.recomendation-result-page', [
             'title' => 'Hasil Rekomendasi',
             'alternatives' => $alternatives,

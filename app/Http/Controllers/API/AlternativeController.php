@@ -35,7 +35,7 @@ class AlternativeController extends Controller
 
         foreach ($items as $item) {
             $item['created_by'] = 1; // ID User sementara
-            $results[] = $this->alternativeService->create($item);
+            $results[] = $this->alternativeService->store($item);
         }
 
         // Kembalikan semua data yang berhasil dibuat atau hanya satu jika bukan batch

@@ -1,5 +1,4 @@
 <?php
-
 use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
@@ -15,15 +14,11 @@ new #[Layout('layouts.guest')] class extends Component
     public function login(): void
     {
         $this->validate();
-
         $this->form->authenticate();
-
         Session::regenerate();
-
         $this->redirect('admin/dashboard', navigate: true);
     }
 }; ?>
-
 
 <div class="relative z-1 bg-white p-6 sm:p-0 dark:bg-gray-900">
     <div class="relative flex h-screen w-full flex-col justify-center sm:p-0 lg:flex-row dark:bg-gray-900">

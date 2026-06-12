@@ -61,10 +61,10 @@ function initWeightChart() {
     // ✅ CREATE NEW
     window.weightChart = new ApexCharts(chartEl, {
         series: [
-            { name: "EW-TOPSIS", data: ew },
-            { name: "RS-TOPSIS", data: rs },
-            { name: "RS-TOPSIS", data: rr },
-            { name: "ROC-TOPSIS", data: roc },
+            { name: "EW", data: ew },
+            { name: "RS", data: rs },
+            { name: "RS", data: rr },
+            { name: "ROC", data: roc },
         ],
         chart: {
             type: "bar",
@@ -111,10 +111,10 @@ function initSPKChart() {
 
         window[`chart_${id}`] = new ApexCharts(lineEl, {
             series: [
-                { name: "EW-TOPSIS", data: ew },
-                { name: "RS-TOPSIS", data: rs },
-                { name: "RR-TOPSIS", data: rr },
-                { name: "ROC-TOPSIS", data: roc },
+                { name: "EW", data: ew },
+                { name: "RS", data: rs },
+                { name: "RR", data: rr },
+                { name: "ROC", data: roc },
             ],
             chart: {
                 type: "line",

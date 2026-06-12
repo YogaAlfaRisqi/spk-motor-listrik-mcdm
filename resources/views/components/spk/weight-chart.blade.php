@@ -4,7 +4,6 @@
 ])
 
 @php
-// 🔥 samakan dengan tabel (INI KUNCI)
 $ewData  = collect($weights['ew'] ?? [])->keyBy('id_kriteria');
 $rsData  = collect($weights['rs'] ?? [])->keyBy('id_kriteria');
 $rrData  = collect($weights['rr'] ?? [])->keyBy('id_kriteria');
@@ -51,5 +50,4 @@ $roc = collect($criterias)
 
     {{-- CHART --}}
     <div id="weightChart" style="min-height: 350px;"></div>
-
 </div>

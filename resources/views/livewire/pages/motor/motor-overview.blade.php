@@ -1,6 +1,7 @@
 <div class="relative">
-    <div class="pt-[120px] min-h-screen bg-[#0A0C0F] text-white">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-48">
+    @include('livewire.pages.motor.partials.hero')
+    <div class="pt-10 min-h-screen bg-[#0A0C0F] text-white">
+        <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pb-48">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <!-- partials for sidebar -->
                 @include('livewire.pages.motor.partials.sidebar')
@@ -246,7 +247,7 @@
     (function() {
         /* ─────────────── DATA (dari PHP via JSON) ─────────────── */
         const ALL_MOTORS = @json($motors);
-        const PER_PAGE = 6;
+        const PER_PAGE = 12;
         let currentPage = 1;
         let selected = [];
 

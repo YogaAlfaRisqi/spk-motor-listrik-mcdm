@@ -54,6 +54,13 @@
                     <input id="gambar" name="gambar" type="file"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                 </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Created By</label>
+                    <select id="created_by" name="created_by"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                        <option value="{{ auth()->id() }}" selected>{{ auth()->user()->name }}</option>
+                    </select>
+                </div>
             </div>
 
             <div class="mt-6 flex justify-end gap-3">

@@ -9,6 +9,7 @@ use Livewire\Attributes\Layout;
 class HomePage extends Component
 {
     public string $currentPage = '/';
+    
 
     public function navigate($page)
     {

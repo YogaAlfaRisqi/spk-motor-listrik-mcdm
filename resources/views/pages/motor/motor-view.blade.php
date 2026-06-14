@@ -1,10 +1,7 @@
 <x-layouts.app>
     <div class="pt-[120px] min-h-screen bg-[#0A0C0F] text-white">
-        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-            
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
                 <!-- SIDEBAR -->
                 <aside class="lg:col-span-3">
                     <div class="sticky top-[120px] max-h-[calc(100vh-140px)] overflow-y-auto bg-[#14161A] border border-white/5 p-6 rounded-2xl">

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\DashboardController;
 use App\Http\Controllers\Web\Admin\CriteriaController;
@@ -8,12 +7,13 @@ use App\Http\Controllers\Web\Admin\WeightController;
 use App\Http\Controllers\Web\Admin\AlternativeValueController;
 use App\Http\Controllers\Web\Admin\RecomendationResultController;
 use App\Http\Controllers\Web\Admin\UserController;
-use App\Http\Controllers\Web\Public\HomeController;
 use App\Http\Controllers\Web\Public\MotorController;
+use App\Livewire\HomePage;
+use App\Livewire\MotorPage;
 
-
-// public routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Public Routes
+Route::get('/', HomePage::class)->name('home');
+Route::get('/motor-overview', MotorPage::class)->name('motor-overview');
 Route::get('/motor', [MotorController::class, 'index'])->name('motor');
 
 // Admin Routes
@@ -28,7 +28,6 @@ Route::middleware(['auth'])
         Route::resource('alternative-values', AlternativeValueController::class);
         Route::resource('recommendation-results', RecomendationResultController::class);
         Route::resource('users', UserController::class);
-
         Route::view('profile', 'profile')
             ->name('profile');
     });

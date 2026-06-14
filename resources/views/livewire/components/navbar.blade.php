@@ -161,12 +161,12 @@
 
         {{-- Desktop Nav --}}
         <ul class="nav-links">
-            <li><a href="/home">Beranda</a></li>
+            <li><a href="/">Beranda</a></li>
             <li><a href="#how-it-works" class="nav-link {{ request()->is('how-it-works*') ? 'active' : '' }}">Cara Kerja</a></li>
             <li><a href="#about" class="nav-link {{ request()->is('about*') ? 'active' : '' }}">Tentang</a></li>
             <li>
-                <a href="{{ route('motor') }}"
-                    class="nav-link {{ request()->routeIs('motor') ? 'active' : '' }}">
+                <a href="{{ route('motor-overview') }}"
+                    class="nav-link {{ request()->routeIs('motor-overview') ? 'active' : '' }}">
                     Motor
                 </a>
             </li>
@@ -187,7 +187,7 @@
     <div class="nav-mobile" id="mobileMenu">
         <a href="#home" class="nav-link">Beranda</a>
         <a href="#how-it-works" class="nav-link">Cara Kerja</a>
-        <a href="#about" class="nav-link">Tentang</a>
+        <a href="#tentang" class="nav-link">Tentang</a>
         <a href="#motor" class="nav-link">Motor</a>
         <a href="" class="nav-cta">Mulai Analisis</a>
     </div>

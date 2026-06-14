@@ -217,7 +217,14 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
+/* body {
+    font-family: "DM Sans", sans-serif;
+    background: radial-gradient(circle at top, #111418 0%, #0a0c0f 60%);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+} */
+.public-layout {
     font-family: "DM Sans", sans-serif;
     background: radial-gradient(circle at top, #111418 0%, #0a0c0f 60%);
     color: var(--text);
@@ -978,14 +985,18 @@ pre[class*="language-"] {
     }
 }
 
-/* Scrollbar modern */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: var(--lime);
     border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 /* ----- HERO ----- */

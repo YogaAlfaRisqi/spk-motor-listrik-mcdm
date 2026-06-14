@@ -125,7 +125,7 @@
                 </button>
 
                 <!-- Notification Dropdown -->
-                <x-header.notification-dropdown />
+   
             </div>
 
             <!-- User Dropdown -->

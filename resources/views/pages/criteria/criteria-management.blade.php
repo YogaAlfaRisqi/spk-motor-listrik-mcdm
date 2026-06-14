@@ -24,9 +24,9 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                         @forelse ($criterias as $criteria)
-                            @include('pages.criteria.partials.table-row', ['criteria' => $criteria])
+                        @include('pages.criteria.partials.table-row', ['criteria' => $criteria])
                         @empty
-                            @include('pages.criteria.partials.empty-state')
+                        @include('pages.criteria.partials.empty-state')
                         @endforelse
                     </tbody>
                 </table>
@@ -41,99 +41,106 @@
 @endsection
 
 @push('modals')
-    @include('pages.criteria.partials.form-modal')
-    @include('pages.criteria.partials.delete-modal')
+@include('pages.criteria.partials.form-modal')
+@include('pages.criteria.partials.delete-modal')
 @endpush
 
 @push('scripts')
 <script>
-    const formModal   = document.getElementById('criteriaModal');
-    const deleteModal = document.getElementById('deleteCriteriaModal');
+    function initCriteriaPage() {
+        const formModal = document.getElementById('criteriaModal');
+        const deleteModal = document.getElementById('deleteCriteriaModal');
 
-    const btnAdd        = document.getElementById('btnAddCriteria');
-    const btnCloseForm  = document.getElementById('closeCriteriaModal');
-    const btnCancelForm = document.getElementById('cancelCriteriaModal');
+        if (!formModal || !deleteModal) return; // guard: halaman lain, skip
 
-    const form        = document.getElementById('criteriaForm');
-    const title       = document.getElementById('criteriaModalTitle');
-    const methodField = document.getElementById('criteriaMethod');
-    const idField     = document.getElementById('criteriaId');
+        const btnAdd = document.getElementById('btnAddCriteria');
+        const btnCloseForm = document.getElementById('closeCriteriaModal');
+        const btnCancelForm = document.getElementById('cancelCriteriaModal');
 
-    const kode       = document.getElementById('kode_kriteria');
-    const nama       = document.getElementById('nama_kriteria');
-    const keterangan = document.getElementById('keterangan');
-    const satuan     = document.getElementById('skala_penilaian');
-    const tipe       = document.getElementById('tipe');
+        const form = document.getElementById('criteriaForm');
+        const title = document.getElementById('criteriaModalTitle');
+        const methodField = document.getElementById('criteriaMethod');
+        const idField = document.getElementById('criteriaId');
 
-    const deleteForm   = document.getElementById('deleteCriteriaForm');
-    const deleteName   = document.getElementById('deleteCriteriaName');
-    const btnCloseDelete  = document.getElementById('closeDeleteCriteriaModal');
-    const btnCancelDelete = document.getElementById('cancelDeleteCriteriaModal');
+        const kode = document.getElementById('kode_kriteria');
+        const nama = document.getElementById('nama_kriteria');
+        const keterangan = document.getElementById('keterangan');
+        const satuan = document.getElementById('skala_penilaian');
+        const tipe = document.getElementById('tipe');
 
-    const openFormModal = () => {
-        formModal.classList.remove('hidden');
-        formModal.classList.add('flex');
-    };
+        const deleteForm = document.getElementById('deleteCriteriaForm');
+        const deleteName = document.getElementById('deleteCriteriaName');
+        const btnCloseDelete = document.getElementById('closeDeleteCriteriaModal');
+        const btnCancelDelete = document.getElementById('cancelDeleteCriteriaModal');
 
-    const closeFormModal = () => {
-        form.reset();
-        form.action       = "{{ route('admin.criteria.store') }}";
-        methodField.value = 'POST';
-        idField.value     = '';
-        title.textContent = 'Tambah Kriteria';
-        formModal.classList.add('hidden');
-        formModal.classList.remove('flex');
-    };
+        const openFormModal = () => {
+            formModal.classList.remove('hidden');
+            formModal.classList.add('flex');
+        };
 
-    const openDeleteModal = () => {
-        deleteModal.classList.remove('hidden');
-        deleteModal.classList.add('flex');
-    };
+        const closeFormModal = () => {
+            form.reset();
+            form.action = "{{ route('admin.criteria.store') }}";
+            methodField.value = 'POST';
+            idField.value = '';
+            title.textContent = 'Tambah Kriteria';
+            formModal.classList.add('hidden');
+            formModal.classList.remove('flex');
+        };
 
-    const closeDeleteModal = () => {
-        deleteModal.classList.add('hidden');
-        deleteModal.classList.remove('flex');
-    };
+        const openDeleteModal = () => {
+            deleteModal.classList.remove('hidden');
+            deleteModal.classList.add('flex');
+        };
 
-    btnAdd?.addEventListener('click', openFormModal);
-    btnCloseForm?.addEventListener('click', closeFormModal);
-    btnCancelForm?.addEventListener('click', closeFormModal);
+        const closeDeleteModal = () => {
+            deleteModal.classList.add('hidden');
+            deleteModal.classList.remove('flex');
+        };
 
-    document.querySelectorAll('.btn-edit').forEach(button => {
-        button.addEventListener('click', function () {
-            title.textContent = 'Edit Kriteria';
-            form.action       = this.dataset.updateUrl;
-            methodField.value = 'PUT';
-            idField.value     = this.dataset.id;
+        btnAdd?.addEventListener('click', openFormModal);
+        btnCloseForm?.addEventListener('click', closeFormModal);
+        btnCancelForm?.addEventListener('click', closeFormModal);
 
-            kode.value       = this.dataset.kode       || '';
-            nama.value       = this.dataset.nama       || '';
-            keterangan.value = this.dataset.keterangan || '';
-            satuan.value     = this.dataset.satuan     || '';
-            tipe.value       = this.dataset.tipe       || '';
+        document.querySelectorAll('.btn-edit').forEach(button => {
+            button.addEventListener('click', function() {
+                title.textContent = 'Edit Kriteria';
+                form.action = this.dataset.updateUrl;
+                methodField.value = 'PUT';
+                idField.value = this.dataset.id;
 
-            openFormModal();
+                kode.value = this.dataset.kode || '';
+                nama.value = this.dataset.nama || '';
+                keterangan.value = this.dataset.keterangan || '';
+                satuan.value = this.dataset.satuan || '';
+                tipe.value = this.dataset.tipe || '';
+
+                openFormModal();
+            });
         });
-    });
 
-    document.querySelectorAll('.btn-delete').forEach(button => {
-        button.addEventListener('click', function () {
-            deleteName.textContent = this.dataset.name || '-';
-            deleteForm.action      = this.dataset.deleteUrl;
-            openDeleteModal();
+        document.querySelectorAll('.btn-delete').forEach(button => {
+            button.addEventListener('click', function() {
+                deleteName.textContent = this.dataset.name || '-';
+                deleteForm.action = this.dataset.deleteUrl;
+                openDeleteModal();
+            });
         });
-    });
 
-    btnCloseDelete?.addEventListener('click', closeDeleteModal);
-    btnCancelDelete?.addEventListener('click', closeDeleteModal);
+        btnCloseDelete?.addEventListener('click', closeDeleteModal);
+        btnCancelDelete?.addEventListener('click', closeDeleteModal);
 
-    [formModal, deleteModal].forEach(modal => {
-        modal?.addEventListener('click', function (e) {
-            if (e.target === this) {
-                closeFormModal();
-                closeDeleteModal();
-            }
+        [formModal, deleteModal].forEach(modal => {
+            modal?.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeFormModal();
+                    closeDeleteModal();
+                }
+            });
         });
-    });
+    }
+
+    document.addEventListener('livewire:navigated', initCriteriaPage);
+    initCriteriaPage();
 </script>
 @endpush

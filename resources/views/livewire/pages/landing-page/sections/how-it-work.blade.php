@@ -2,30 +2,32 @@
     <div class="section-inner">
         <div class="section-label">Alur Penggunaan</div>
         <h2 class="section-title">Empat Langkah Sederhana</h2>
-        <p class="section-sub">Dari input preferensi hingga mendapatkan rekomendasi motor listrik terbaik, hanya dalam beberapa menit.</p>
+        <p class="section-sub">Dari memilih motor hingga mendapatkan rekomendasi terbaik, hanya dalam beberapa klik.</p>
 
         <div class="steps-grid">
             <div class="step">
                 <div class="step-num">01</div>
                 <div class="step-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
                     </svg>
                 </div>
-                <div class="step-title">Tentukan Profil & Kebutuhan</div>
-                <p class="step-desc">Isi formulir singkat mengenai kebutuhan harian, anggaran, dan preferensi fitur motor listrik yang Anda inginkan.</p>
+                <div class="step-title">Jelajahi Katalog Motor</div>
+                <p class="step-desc">Telusuri daftar motor listrik dari berbagai brand, gunakan filter harga dan brand untuk mempersempit pilihan sesuai kebutuhan Anda.</p>
             </div>
             <div class="step">
                 <div class="step-num">02</div>
                 <div class="step-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-                        <path d="M12 20h9" />
-                        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
                     </svg>
                 </div>
-                <div class="step-title">Atur Bobot Kriteria</div>
-                <p class="step-desc">Tentukan tingkat kepentingan setiap kriteria menggunakan perbandingan berpasangan metode AHP. Sistem panduan interaktif tersedia.</p>
+                <div class="step-title">Pilih Motor untuk Dibandingkan</div>
+                <p class="step-desc">Tandai motor yang ingin dibandingkan dengan tombol "Bandingkan" pada setiap kartu. Minimal pilih 2 motor untuk memulai analisis.</p>
             </div>
             <div class="step">
                 <div class="step-num">03</div>
@@ -34,8 +36,8 @@
                         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                     </svg>
                 </div>
-                <div class="step-title">Proses Analisis MCDM</div>
-                <p class="step-desc">Sistem secara otomatis menjalankan algoritma TOPSIS, menormalisasi data, dan menghitung skor preferensi setiap alternatif.</p>
+                <div class="step-title">Proses Analisis TOPSIS</div>
+                <p class="step-desc">Sistem secara otomatis menormalisasi data spesifikasi, menerapkan bobot kriteria, dan menghitung skor preferensi setiap motor.</p>
             </div>
             <div class="step">
                 <div class="step-num">04</div>
@@ -46,7 +48,7 @@
                     </svg>
                 </div>
                 <div class="step-title">Terima Rekomendasi</div>
-                <p class="step-desc">Dapatkan daftar rekomendasi motor listrik terurut lengkap dengan skor, penjelasan, dan perbandingan detail untuk mendukung keputusan Anda.</p>
+                <p class="step-desc">Lihat peringkat motor berdasarkan skor TOPSIS, lengkap dengan tabel perbandingan spesifikasi dan alasan mengapa motor tersebut direkomendasikan.</p>
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@
                      <div class="mcdm-methods">
                          <div class="method-row">
                              <div>
-                                 <div class="method-name">EW-TOPSIS</div>
+                                 <div class="method-name">EW</div>
                                  <div class="method-desc-sm">Entropy Weighting + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
@@ -26,7 +26,7 @@
 
                          <div class="method-row">
                              <div>
-                                 <div class="method-name">RS-TOPSIS</div>
+                                 <div class="method-name">RS</div>
                                  <div class="method-desc-sm">Rank Sum Weighting + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
@@ -34,7 +34,7 @@
 
                          <div class="method-row">
                              <div>
-                                 <div class="method-name">RR-TOPSIS</div>
+                                 <div class="method-name">RR</div>
                                  <div class="method-desc-sm">Rank Reciprocal Weighting + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
@@ -42,7 +42,7 @@
 
                          <div class="method-row">
                              <div>
-                                 <div class="method-name">ROC-TOPSIS</div>
+                                 <div class="method-name">ROC</div>
                                  <div class="method-desc-sm">Rank Order Centroid + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>

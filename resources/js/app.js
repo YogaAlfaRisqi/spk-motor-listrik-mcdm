@@ -74,17 +74,18 @@ function initWeightChart() {
         xaxis: {
             categories: labels,
             labels: {
-                    rotate: -45,
-                },
+                rotate: -45,
+            },
         },
         legend: {
-            position:"bottom",
-            offsetY:30
-        }
+            position: "bottom",
+            offsetY: 30,
+        },
     });
 
     window.weightChart.render();
 }
+
 // ================= SPK CHART =================
 function initSPKChart() {
     const dataEls = document.querySelectorAll('[id^="spk-chart-data-"]');
@@ -133,7 +134,7 @@ function initSPKChart() {
             },
             legend: {
                 position: "bottom",
-                offsetY:50
+                offsetY: 50,
             },
         });
 
@@ -145,24 +146,14 @@ function initSPKChart() {
 function initCharts() {
     console.log("INIT ALL CHARTS");
 
-    // kasih delay biar Livewire selesai render DOM
     setTimeout(() => {
         initWeightChart();
         initSPKChart();
     }, 200);
 }
 
-document.addEventListener("livewire:load", () => {
-    console.log("LIVEWIRE LOAD");
-    initCharts();
-});
+// Jalankan saat first load
+initCharts();
 
-document.addEventListener("livewire:navigated", () => {
-    console.log("LIVEWIRE NAVIGATED");
-
-    setTimeout(() => {
-        initCharts();
-    }, 150);
-});
-// 🔥 LIVEWIRE NAVIGATION
+// Jalankan ulang setiap kali Livewire navigate (SPA-style navigation)
 document.addEventListener("livewire:navigated", initCharts);

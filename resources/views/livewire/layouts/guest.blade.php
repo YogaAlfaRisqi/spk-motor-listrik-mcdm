@@ -13,7 +13,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="public-layout">
     @livewire('navbar')
     <main class="pt-auto py-auto max-w-(--breakpoint-2xl) mx-auto">
         {{ $slot }}

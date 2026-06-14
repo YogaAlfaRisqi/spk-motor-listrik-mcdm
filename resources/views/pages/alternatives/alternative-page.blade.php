@@ -70,6 +70,7 @@
         const kapasitasBatrei = document.getElementById('kapasitas_baterai');
         const dayaMaksimum = document.getElementById('daya_maksimum');
         const gambar = document.getElementById('gambar');
+        const createdBy = document.getElementById('created_by');
 
         const deleteForm = document.getElementById('deleteAlternativeForm');
         const deleteName = document.getElementById('deleteAlternativeName');
@@ -119,6 +120,7 @@
                 kapasitasBatrei.value = this.dataset.kapasitasBaterai || '';
                 dayaMaksimum.value = this.dataset.dayaMaksimum || '';
                 gambar.value = '';
+                createdBy.value = this.dataset.createdBy || '';
 
                 openFormModal();
             });

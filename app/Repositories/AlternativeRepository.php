@@ -6,6 +6,7 @@ use App\Models\MotorListrik;
 use App\Repositories\Interfaces\AlternativeRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class AlternativeRepository implements AlternativeRepositoryInterface
 {   
@@ -41,6 +42,7 @@ class AlternativeRepository implements AlternativeRepositoryInterface
     public function store(array $data): MotorListrik
     {
         // todo: To store new alternative data in the database
+        $data['created_by'] = Auth::id() ?? 1;
         return MotorListrik::create($data);
     }
 

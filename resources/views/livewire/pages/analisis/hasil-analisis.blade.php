@@ -162,19 +162,19 @@
                     <tr class="border-b border-white/5 hover:bg-white/5">
                         <td class="p-4 text-gray-400 font-medium sticky left-0 bg-[#14161A]">Waktu Pengisian</td>
                         @foreach($this->motors as $motor)
-                        <td class="p-4">{{ $motor->waktu_pengisian }} jam</td>
+                        <td class="p-4">{{ $motor->waktu_pengisian }} menit</td>
                         @endforeach
                     </tr>
                     <tr class="border-b border-white/5 hover:bg-white/5">
                         <td class="p-4 text-gray-400 font-medium sticky left-0 bg-[#14161A]">Kapasitas Baterai</td>
                         @foreach($this->motors as $motor)
-                        <td class="p-4">{{ $motor->kapasitas_baterai }} Ah</td>
+                        <td class="p-4">{{ $motor->kapasitas_baterai }} kWh</td>
                         @endforeach
                     </tr>
                     <tr class="hover:bg-white/5">
                         <td class="p-4 text-gray-400 font-medium sticky left-0 bg-[#14161A]">Daya Maksimum</td>
                         @foreach($this->motors as $motor)
-                        <td class="p-4">{{ $motor->daya_maksimum }} W</td>
+                        <td class="p-4">{{ $motor->daya_maksimum }} kW</td>
                         @endforeach
                     </tr>
                 </tbody>

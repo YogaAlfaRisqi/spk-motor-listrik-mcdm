@@ -33,7 +33,7 @@
                 </div>
 
                 <div>
-                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Waktu Pengisian (jam)</label>
+                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Waktu Pengisian (menit)</label>
                     <input id="waktu_pengisian" name="waktu_pengisian" type="number" step="0.1"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                 </div>

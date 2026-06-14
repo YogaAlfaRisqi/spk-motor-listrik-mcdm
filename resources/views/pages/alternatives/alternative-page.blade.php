@@ -55,18 +55,14 @@
     function initAlternativePage() {
         const formModal = document.getElementById('alternativeModal');
         const deleteModal = document.getElementById('deleteAlternativeModal');
-
         if (!formModal || !deleteModal) return;
-
         const btnAdd = document.getElementById('btnAddAlternative');
         const btnCloseForm = document.getElementById('closeAlternativeModal');
         const btnCancelForm = document.getElementById('cancelAlternativeModal');
-
         const form = document.getElementById('alternativeForm');
         const title = document.getElementById('alternativeModalTitle');
         const methodField = document.getElementById('alternativeMethod');
         const idField = document.getElementById('alternativeId');
-
         const namaMoto = document.getElementById('nama_motor');
         const harga = document.getElementById('harga');
         const jarakTempuh = document.getElementById('jarak_tempuh');

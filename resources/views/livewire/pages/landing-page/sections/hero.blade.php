@@ -120,13 +120,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="criteria-pills">
-                    <span class="pill">Harga</span>
-                    <span class="pill">Jarak Tempuh</span>
-                    <span class="pill">Tenaga</span>
-                    <span class="pill">Garansi</span>
-                </div>
             </div>
 
             <div class="float-card float-card-2">

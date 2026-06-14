@@ -98,15 +98,11 @@ $currentPath = request()->path();
                 </span>
 
             </div>
-
-
             <!-- Logo Icon (Sidebar Collapse) -->
             <div
                 x-show="!$store.sidebar.isExpanded && !$store.sidebar.isHovered && !$store.sidebar.isMobileOpen"
                 class="w-9 h-9 flex items-center justify-center rounded-lg bg-blue-600 text-white font-bold">
-
                 E
-
             </div>
 
         </a>
@@ -148,7 +144,6 @@ $currentPath = request()->path();
                                                 !$store.sidebar.isExpanded && !$store.sidebar.isHovered ?
                                                 'xl:justify-center' : 'xl:justify-start'
                                             ]">
-
                                 <!-- Icon -->
                                 <span :class="isSubmenuOpen({{ $groupIndex }}, {{ $itemIndex }}) ?
                                                     'menu-item-icon-active' : 'menu-item-icon-inactive'">

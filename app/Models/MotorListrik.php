@@ -18,6 +18,7 @@ class MotorListrik extends Model
         'waktu_pengisian',
         'kapasitas_baterai',
         'daya_maksimum',
+        'image',
         'created_by', 
     ];
 

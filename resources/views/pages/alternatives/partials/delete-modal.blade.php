@@ -16,7 +16,6 @@
 
         <form id="deleteAlternativeForm" method="POST" action="">
             @csrf
-            {{-- DELETE wajib karena HTML form hanya support GET/POST --}}
             <input type="hidden" name="_method" value="DELETE">
 
             <div class="flex justify-end gap-3 border-t border-gray-200 px-6 py-4 dark:border-gray-800">

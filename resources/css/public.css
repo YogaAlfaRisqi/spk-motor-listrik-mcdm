@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap")
+layer(base);
+@import "prismjs/themes/prism.min.css";
+@import "tailwindcss";
+
+:root {
+    --lime: #c8f135;
+    --lime-dark: #a8d020;
+    --dark: #0a0c0f;
+    --dark-2: #111418;
+    --glass: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e8edf2;
+    --text-soft: #a8b4c0;
+    --radius: 20px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background: radial-gradient(circle at top, #111418 0%, #0a0c0f 60%);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Syne", sans-serif;
+    letter-spacing: -0.5px;
+}
+

@@ -150,7 +150,7 @@
     <div class="nav-bg"></div>
     <div class="nav-inner">
         {{-- Logo --}}
-        <a href="" class="nav-logo">
+        <a href="/" class="nav-logo">
             <div class="logo-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                     <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#0A0C0F" stroke="#0A0C0F" stroke-width="1.5" stroke-linejoin="round" />
@@ -161,19 +161,19 @@
 
         {{-- Desktop Nav --}}
         <ul class="nav-links">
-            <li><a href="/home">Beranda</a></li>
+            <li><a href="/">Beranda</a></li>
             <li><a href="#how-it-works" class="nav-link {{ request()->is('how-it-works*') ? 'active' : '' }}">Cara Kerja</a></li>
             <li><a href="#about" class="nav-link {{ request()->is('about*') ? 'active' : '' }}">Tentang</a></li>
             <li>
-                <a href="{{ route('motor') }}"
-                    class="nav-link {{ request()->routeIs('motor') ? 'active' : '' }}">
+                <a href="{{ route('motor-overview') }}"
+                    class="nav-link {{ request()->routeIs('motor-overview') ? 'active' : '' }}">
                     Motor
                 </a>
             </li>
         </ul>
 
         {{-- CTA --}}
-        <a href="" class="nav-cta desktop-only">
+        <a href="{{ route('motor-overview') }}" class="nav-cta desktop-only">
             Mulai Analisis
         </a>
 
@@ -185,11 +185,11 @@
 
     {{-- Mobile Menu --}}
     <div class="nav-mobile" id="mobileMenu">
-        <a href="#home" class="nav-link">Beranda</a>
+        <a href="/" class="nav-link">Beranda</a>
         <a href="#how-it-works" class="nav-link">Cara Kerja</a>
-        <a href="#about" class="nav-link">Tentang</a>
-        <a href="#motor" class="nav-link">Motor</a>
-        <a href="" class="nav-cta">Mulai Analisis</a>
+        <a href="#tentang" class="nav-link">Tentang</a>
+        <a href="{{ route('motor-overview') }}" class="nav-link">Motor</a>
+        <a href="{{ route('motor-overview') }}" class="nav-cta">Mulai Analisis</a>
     </div>
 </nav>
 

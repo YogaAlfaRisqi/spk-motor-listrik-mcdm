@@ -1,4 +1,4 @@
-<div> {{-- ✅ ROOT WAJIB --}}
+<div>
 
     <livewire:components.navbar :currentPage="$currentPage" />
 

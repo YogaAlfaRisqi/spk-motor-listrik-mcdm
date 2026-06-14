@@ -10,7 +10,6 @@
 
         <form id="alternativeForm" method="POST" action="{{ route('admin.alternatives.store') }}" class="px-6 py-5">
             @csrf
-            {{-- Satu field _method saja, dikontrol JS. JANGAN pakai @method() --}}
             <input type="hidden" name="_method" id="alternativeMethod" value="POST">
             <input type="hidden" id="alternativeId">
 
@@ -48,6 +47,11 @@
                 <div>
                     <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Daya Maksimum (kW)</label>
                     <input id="daya_maksimum" name="daya_maksimum" type="number" step="0.1"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Gambar</label>
+                    <input id="gambar" name="gambar" type="file"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                 </div>
             </div>

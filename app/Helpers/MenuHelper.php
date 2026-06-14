@@ -18,13 +18,13 @@ class MenuHelper
                 'path' => '/admin/criteria',
             ],
              [
-                'icon' => 'calendar',
+                'icon' => 'ai-assistant',
                 'name' => 'Alternatives',
                 'path' => '/admin/alternatives',
             ],
             
             [
-                'icon' => 'user-profile',
+                'icon' => 'task',
                 'name' => 'Bobot',
                 'path' => '/admin/weight',
             ],
@@ -36,7 +36,7 @@ class MenuHelper
             // ],
 
             [
-                'icon' => 'user-profile',
+                'icon' => 'support-ticket',
                 'name' => 'Hasil Rekomendasi',
                 'path' => '/admin/recommendation-results',
             ],

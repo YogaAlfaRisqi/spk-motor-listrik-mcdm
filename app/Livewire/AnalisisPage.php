@@ -39,9 +39,9 @@ class AnalisisPage extends Component
     public array $criteriaUnit = [
         'harga'              => 'Rp',
         'jarak_tempuh'       => 'km',
-        'waktu_pengisian'    => 'jam',
-        'kapasitas_baterai'  => 'Ah',
-        'daya_maksimum'      => 'W',
+        'waktu_pengisian'    => 'menit',
+        'kapasitas_baterai'  => 'kWh',
+        'daya_maksimum'      => 'kW',
     ];
 
     public function mount()

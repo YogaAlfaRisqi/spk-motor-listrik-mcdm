@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 #[Layout('livewire.layouts.motor')]
 class MotorPage extends Component
 {
-    // public string $currentPage = '/';
+    public string $currentPage = '/';
 
     public array $motors = [];
 
@@ -23,7 +23,7 @@ class MotorPage extends Component
 
     public function navigate(string $page): void
     {
-        // $this->currentPage = $page;
+        $this->currentPage = $page;
     }
 
     public function render()

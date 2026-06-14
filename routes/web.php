@@ -7,14 +7,14 @@ use App\Http\Controllers\Web\Admin\WeightController;
 use App\Http\Controllers\Web\Admin\AlternativeValueController;
 use App\Http\Controllers\Web\Admin\RecomendationResultController;
 use App\Http\Controllers\Web\Admin\UserController;
-use App\Http\Controllers\Web\Public\MotorController;
+use App\Livewire\AnalisisPage;
 use App\Livewire\HomePage;
 use App\Livewire\MotorPage;
 
 // Public Routes
 Route::get('/', HomePage::class)->name('home');
 Route::get('/motor-overview', MotorPage::class)->name('motor-overview');
-Route::get('/motor', [MotorController::class, 'index'])->name('motor');
+Route::get('/motor/compare', AnalisisPage::class)->name('analisis');
 
 // Admin Routes
 Route::middleware(['auth'])

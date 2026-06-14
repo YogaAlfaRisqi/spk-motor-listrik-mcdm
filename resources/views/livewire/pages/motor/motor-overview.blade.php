@@ -262,10 +262,10 @@
             <div
                 id="card-${m.id_motor}"
                 class="motor-card${sel ? ' is-selected' : ''} flex flex-col bg-[#14161A] border border-white/5 rounded-2xl overflow-hidden group"
-                data-id="${m.id_motor}" data-name="${m.nama_motor}" data-price="${m.harga}" data-img="${m.img}"
+                data-id="${m.id_motor}" data-name="${m.nama_motor}" data-price="${m.harga}" data-img="${m.image}"
             >
                 <div class="aspect-square bg-[#1a1d23] overflow-hidden">
-                    <img src="${m.img}" alt="${m.nama_motor}"
+                    <img src="${m.image ? m.image : '/images/404 image.png'}" alt="${m.nama_motor}"
                          class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700"
                          loading="lazy">
                 </div>
@@ -427,7 +427,7 @@
                 if (!m) return '';
                 return `
                 <div class="bar-chip">
-                    <img src="${m.img}" alt="${m.nama_motor}">
+                    <img src="${m.image ? m.image : '/images/404 image.png'}" alt="${m.nama_motor}">
                     <div class="bar-chip-info">
                         <div class="bar-chip-name">${m.nama_motor}</div>
                         <div class="bar-chip-price">${m.harga}</div>

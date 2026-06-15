@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\MotorListrik;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class MotorService
 {
@@ -29,13 +30,34 @@ class MotorService
         return $query->paginate($perPage);
     }
 
+    /**
+     * Ambil semua brand unik beserta jumlah motornya.
+     * Brand = kata pertama dari nama_motor.
+     *
+     * @return Collection<int, array{brand: string, count: int}>
+     */
+    public function getBrandsWithCount(): Collection
+    {
+        return MotorListrik::query()
+            ->selectRaw("TRIM(SUBSTRING_INDEX(nama_motor, ' ', 1)) AS brand, COUNT(*) AS count")
+            ->groupByRaw("TRIM(SUBSTRING_INDEX(nama_motor, ' ', 1))")
+            ->orderBy('brand')
+            ->get()
+            ->map(fn ($row) => [
+                'brand' => $row->brand,
+                'count' => (int) $row->count,
+            ]);
+    }
+
     private function applyBrandFilter($query, array $brands): void
     {
         if (empty($brands)) return;
 
         $query->where(function ($q) use ($brands) {
             foreach ($brands as $brand) {
-                $q->orWhere('nama_motor', 'like', '%' . $brand . '%');
+                // Cocokkan kata pertama saja agar "Gesits" tidak match "Gesitson" dll.
+                $q->orWhere('nama_motor', 'like', $brand . ' %')
+                  ->orWhere('nama_motor', '=', $brand);
             }
         });
     }

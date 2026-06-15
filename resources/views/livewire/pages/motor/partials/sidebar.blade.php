@@ -1,5 +1,6 @@
 <div class="lg:col-span-3">
 
+    {{-- ── Mobile: sticky trigger button ── --}}
     <div class="lg:hidden sticky top-[72px] z-30 -mx-3 sm:-mx-6 px-3 sm:px-6 py-3 bg-[#0A0C0F]/95 backdrop-blur border-b border-white/5">
         <button
             onclick="openFilterDrawer()"
@@ -8,16 +9,22 @@
                 <i class="ti ti-adjustments-horizontal" style="font-size:18px" aria-hidden="true"></i>
                 Filter Pencarian
             </span>
-            <span id="filterActiveBadge" class="hidden bg-[#C8F135] text-black text-[10px] font-extrabold rounded-full w-5 h-5 items-center justify-center"></span>
+            @if (count($brands) > 0)
+                <span class="bg-[#C8F135] text-black text-[10px] font-extrabold rounded-full w-5 h-5 flex items-center justify-center">
+                    {{ count($brands) }}
+                </span>
+            @endif
         </button>
     </div>
 
+    {{-- ── Backdrop (mobile) ── --}}
     <div
         id="filterBackdrop"
         onclick="closeFilterDrawer()"
         class="lg:hidden fixed inset-0 bg-black/60 z-40 opacity-0 pointer-events-none transition-opacity duration-300"
     ></div>
 
+    {{-- ── Drawer / Sidebar ── --}}
     <div
         id="filterDrawer"
         class="
@@ -31,6 +38,7 @@
             transition-transform duration-300 ease-out
         "
     >
+        {{-- Header mobile --}}
         <div class="flex items-center justify-between mb-6 lg:hidden">
             <h2 class="font-syne font-extrabold text-xl text-[#C8F135] tracking-tight">Filter Pencarian</h2>
             <button onclick="closeFilterDrawer()" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/5 text-gray-400 hover:text-white transition" aria-label="Tutup filter">
@@ -38,6 +46,7 @@
             </button>
         </div>
 
+        {{-- Header desktop --}}
         <div class="hidden lg:flex items-center justify-between mb-6">
             <h2 class="font-syne font-extrabold text-xl text-[#C8F135] tracking-tight">Filter Pencarian</h2>
             <button
@@ -51,6 +60,7 @@
 
         <div class="space-y-8">
 
+            {{-- ── Urutkan ── --}}
             <div>
                 <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Urutkan</label>
                 <div class="relative">
@@ -65,6 +75,7 @@
                 </div>
             </div>
 
+            {{-- ── Rentang Harga ── --}}
             <div>
                 <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Rentang Harga</label>
                 <div class="flex items-center justify-between mb-3 bg-[#0A0C0F] border border-white/10 rounded-xl px-4 py-2.5">
@@ -83,35 +94,100 @@
                 </div>
             </div>
 
-            <div>
-                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4">
+            {{-- ── Brand Dropdown ── --}}
+            <div x-data="{ open: false }">
+                <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">
                     Brand
-                    <span class="text-[#C8F135] ml-1" id="brandCount"></span>
+                    @if (count($brands) > 0)
+                        <span class="text-[#C8F135] ml-1 normal-case font-semibold">{{ count($brands) }} dipilih</span>
+                    @endif
                 </label>
-                <div class="space-y-1">
-                    @foreach(['Gesits', 'Alva', 'Uwinfly', 'Polytron'] as $brand)
-                        <label class="flex items-center justify-between gap-3 cursor-pointer group px-1 py-2 rounded-lg hover:bg-white/5 transition">
-                            <span class="flex items-center gap-3">
-                                <input
-                                    type="checkbox"
-                                    value="{{ $brand }}"
-                                    wire:model.live="brands"
-                                    class="w-5 h-5 rounded border border-white/10 bg-[#0A0C0F]
-                                           checked:bg-[#C8F135] checked:border-[#C8F135]
-                                           appearance-none relative
-                                           before:content-['✓'] before:text-black before:text-[11px] before:font-black
-                                           before:absolute before:inset-0 before:flex before:items-center before:justify-center
-                                           before:opacity-0 checked:before:opacity-100">
-                                <span class="text-sm text-gray-400 group-hover:text-white transition">{{ $brand }}</span>
+
+                {{-- Trigger --}}
+                <button
+                    type="button"
+                    @click="open = !open"
+                    class="w-full flex items-center justify-between gap-2 bg-[#0A0C0F] border rounded-xl px-4 py-3 text-sm transition"
+                    :class="open ? 'border-[#C8F135]/50 text-white' : 'border-white/10 text-gray-400 hover:border-white/20 hover:text-white'"
+                >
+                    <span class="truncate">
+                        @if (count($brands) === 0)
+                            Semua brand
+                        @elseif (count($brands) === 1)
+                            {{ $brands[0] }}
+                        @else
+                            {{ $brands[0] }} +{{ count($brands) - 1 }} lainnya
+                        @endif
+                    </span>
+                    <i
+                        class="ti ti-chevron-down text-gray-500 shrink-0 transition-transform duration-200"
+                        :class="open ? 'rotate-180 !text-[#C8F135]' : ''"
+                        style="font-size:16px"
+                        aria-hidden="true"
+                    ></i>
+                </button>
+
+                {{-- Panel --}}
+                <div
+                    x-show="open"
+                    x-transition:enter="transition ease-out duration-150"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-100"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-1"
+                    class="mt-2 bg-[#0A0C0F] border border-white/10 rounded-xl overflow-hidden"
+                    x-cloak
+                >
+                    {{-- Pilih semua / hapus --}}
+                    @if ($availableBrands->count() > 0)
+                        <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/5">
+                            <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                                {{ $availableBrands->count() }} brand tersedia
                             </span>
-                            <span class="text-[10px] text-gray-600 font-semibold">
-                                {{ \App\Models\MotorListrik::where('nama_motor', 'like', '%'.$brand.'%')->count() }}
-                            </span>
-                        </label>
-                    @endforeach
+                            @if (count($brands) > 0)
+                                <button
+                                    type="button"
+                                    wire:click="$set('brands', [])"
+                                    class="text-[10px] font-semibold text-red-400 hover:text-red-300 transition">
+                                    Hapus semua
+                                </button>
+                            @endif
+                        </div>
+                    @endif
+
+                    {{-- Daftar brand --}}
+                    <div class="max-h-52 overflow-y-auto py-1" style="scrollbar-width:thin;scrollbar-color:#C8F135 transparent">
+                        @forelse ($availableBrands as $item)
+                            <label class="flex items-center justify-between gap-3 cursor-pointer group px-4 py-2.5 hover:bg-white/5 transition">
+                                <span class="flex items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        value="{{ $item['brand'] }}"
+                                        wire:model.live="brands"
+                                        class="w-4 h-4 shrink-0 rounded border border-white/10 bg-[#14161A]
+                                               checked:bg-[#C8F135] checked:border-[#C8F135]
+                                               appearance-none relative cursor-pointer
+                                               before:content-['✓'] before:text-black before:text-[9px] before:font-black
+                                               before:absolute before:inset-0 before:flex before:items-center before:justify-center
+                                               before:opacity-0 checked:before:opacity-100 transition"
+                                    >
+                                    <span class="text-sm text-gray-400 group-hover:text-white transition">
+                                        {{ $item['brand'] }}
+                                    </span>
+                                </span>
+                                <span class="text-[10px] text-gray-600 font-semibold tabular-nums shrink-0">
+                                    {{ $item['count'] }}
+                                </span>
+                            </label>
+                        @empty
+                            <p class="text-[11px] text-gray-600 text-center py-4">Tidak ada brand.</p>
+                        @endforelse
+                    </div>
                 </div>
             </div>
 
+            {{-- ── Kapasitas Baterai ── --}}
             <div>
                 <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Kapasitas Baterai</label>
                 <div class="grid grid-cols-2 gap-2">
@@ -132,6 +208,7 @@
                 </div>
             </div>
 
+            {{-- ── Mobile actions ── --}}
             <div class="space-y-2 pt-2 sticky bottom-0 bg-[#14161A] pb-1 lg:hidden">
                 <button
                     type="button"
@@ -167,22 +244,5 @@ function closeFilterDrawer() {
     backdrop.classList.add('opacity-0', 'pointer-events-none');
     document.body.style.overflow = '';
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const checked = document.querySelectorAll('input[type="checkbox"][wire\\:model\\.live="brands"]:checked').length;
-    const badge = document.getElementById('brandCount');
-    const mBadge = document.getElementById('filterActiveBadge');
-    if (badge) badge.textContent = checked > 0 ? `${checked} dipilih` : '';
-    if (mBadge) {
-        if (checked > 0) {
-            mBadge.textContent = checked;
-            mBadge.classList.remove('hidden');
-            mBadge.classList.add('flex');
-        } else {
-            mBadge.classList.add('hidden');
-            mBadge.classList.remove('flex');
-        }
-    }
-});
 </script>
 @endpush

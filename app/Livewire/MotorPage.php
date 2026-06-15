@@ -17,10 +17,6 @@ class MotorPage extends Component
     public array  $brands   = [];
     public int    $battery  = 0;
 
-    /**
-     * Reset ke halaman 1 setiap kali filter berubah,
-     * agar tidak stuck di halaman yang tidak ada.
-     */
     public function updatedSort(): void     { $this->resetPage(); }
     public function updatedMaxHarga(): void { $this->resetPage(); }
     public function updatedBrands(): void   { $this->resetPage(); }
@@ -38,12 +34,13 @@ class MotorPage extends Component
     public function render(MotorService $motorService)
     {
         return view('livewire.pages.motor.motor-overview', [
-            'motors' => $motorService->getFiltered(
+            'motors'        => $motorService->getFiltered(
                 sort:     $this->sort,
                 maxHarga: $this->maxHarga,
                 brands:   $this->brands,
                 battery:  $this->battery,
             ),
+            'availableBrands' => $motorService->getBrandsWithCount(),
         ]);
     }
 }

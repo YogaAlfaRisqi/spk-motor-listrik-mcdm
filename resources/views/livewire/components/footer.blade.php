@@ -25,8 +25,8 @@
         <h4 class="font-['Syne'] text-xs font-bold text-white/30 uppercase tracking-widest mb-5">Navigasi</h4>
         <ul class="flex flex-col gap-3">
           <li><a href="/" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Beranda</a></li>
-          <li><a href="#how-it-work" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Cara Kerja</a></li>
-          <li><a href="/motor" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Mulai Analisis</a></li>
+          <li><a href="#how-it-works" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Cara Kerja</a></li>
+          <li><a href="motor-overview" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Mulai Analisis</a></li>
           <li><a href="#about" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Tentang Kami</a></li>
         </ul>
       </div>
@@ -37,7 +37,7 @@
         <ul class="flex flex-col gap-3">
           <li><a href="#" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Panduan Penggunaan</a></li>
           <li><a href="#" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Kriteria Penilaian</a></li>
-          <li><a href="/motor-overview" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Daftar Motor Listrik</a></li>
+          <li><a href="motor-overview" class="text-white/50 text-sm hover:text-white transition-colors duration-150">Daftar Motor Listrik</a></li>
         </ul>
       </div>
 

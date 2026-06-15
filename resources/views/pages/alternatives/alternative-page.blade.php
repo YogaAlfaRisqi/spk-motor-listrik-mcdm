@@ -69,13 +69,16 @@
         const waktuPengisian = document.getElementById('waktu_pengisian');
         const kapasitasBatrei = document.getElementById('kapasitas_baterai');
         const dayaMaksimum = document.getElementById('daya_maksimum');
-        const gambar = document.getElementById('gambar');
+        const imageInput = document.getElementById('image');
+        const imagePreview = document.getElementById('imagePreview');
+        const imagePreviewWrapper = document.getElementById('imagePreviewWrapper');
         const createdBy = document.getElementById('created_by');
 
         const deleteForm = document.getElementById('deleteAlternativeForm');
         const deleteName = document.getElementById('deleteAlternativeName');
         const btnCloseDelete = document.getElementById('closeDeleteAlternativeModal');
         const btnCancelDelete = document.getElementById('cancelDeleteAlternativeModal');
+
 
         const openFormModal = () => {
             formModal.classList.remove('hidden');
@@ -119,11 +122,39 @@
                 waktuPengisian.value = this.dataset.waktuPengisian || '';
                 kapasitasBatrei.value = this.dataset.kapasitasBaterai || '';
                 dayaMaksimum.value = this.dataset.dayaMaksimum || '';
-                gambar.value = '';
+                // reset file input
+                imageInput.value = '';
+                // tampilkan gambar lama
+                const imageUrl = this.dataset.image;
+                if (imageUrl) {
+                    imagePreview.src = imageUrl;
+                    imagePreviewWrapper.classList.remove('hidden');
+                } else {
+                    imagePreview.src = '';
+                    imagePreviewWrapper.classList.add('hidden');
+                }
+                
                 createdBy.value = this.dataset.createdBy || '';
+
 
                 openFormModal();
             });
+        });
+        imageInput?.addEventListener('change', function() {
+            const file = this.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreviewWrapper.classList.remove('hidden');
+            };
+
+            reader.readAsDataURL(file);
         });
 
         document.querySelectorAll('.btn-delete').forEach(button => {

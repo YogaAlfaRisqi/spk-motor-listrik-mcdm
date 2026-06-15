@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Http\Controllers\Controller;
@@ -12,11 +13,11 @@ class AlternativeController extends Controller
 {
     public function __construct(
         protected AlternativeService $service
-    ){}
+    ) {}
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request):View
+    public function index(Request $request): View
     {
         //
         $search = $request->string('search')->toString();
@@ -25,11 +26,11 @@ class AlternativeController extends Controller
         $alternatives = $this->service->getAll($search, $perPage);
         $title = 'Alternatives';
         return view('pages.alternatives.alternative-page', [
-            'title' => $title, 
+            'title' => $title,
             'alternatives' => $alternatives,
-            'search' => $search,   
+            'search' => $search,
             'per_page' => $perPage,
-            ]);
+        ]);
     }
 
     /**
@@ -38,7 +39,7 @@ class AlternativeController extends Controller
     public function store(StoreAlternativeRequest $request): RedirectResponse
     {
         //
-        $this->service->store($request->validated());
+        $this->service->store($request->validated() + ['foto' => $request->file('image')]);
         return redirect()->back()->with('success', 'Alternative added successfully');
     }
 
@@ -64,7 +65,13 @@ class AlternativeController extends Controller
     public function update(StoreAlternativeRequest $request, string $id)
     {
         //
-        $this->service->update($id, $request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['foto'] = $request->file('image');
+        }
+
+        $this->service->update($id, $data);
         return redirect()->back()->with('success', 'Alternative updated successfully');
     }
 

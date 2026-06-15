@@ -8,7 +8,8 @@
                 class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800">✕</button>
         </div>
 
-        <form id="alternativeForm" method="POST" action="{{ route('admin.alternatives.store') }}" class="px-6 py-5">
+        <form id="alternativeForm" method="POST" action="{{ route('admin.alternatives.store') }}"
+            enctype="multipart/form-data" class="px-6 py-5">
             @csrf
             <input type="hidden" name="_method" id="alternativeMethod" value="POST">
             <input type="hidden" id="alternativeId">
@@ -43,8 +44,7 @@
                         Kapasitas Baterai (kWh)
                     </label>
                     <input id="kapasitas_baterai" name="kapasitas_baterai" type="number"
-                        step="0.01"
-                        min="0"
+                        step="0.01" min="0"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                 </div>
 
@@ -53,15 +53,22 @@
                     <input id="daya_maksimum" name="daya_maksimum" type="number" step="0.01" min="0"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                 </div>
-                <div>
+
+                <div class="md:col-span-2">
                     <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Gambar</label>
-                    <input id="gambar" name="gambar" type="file"
+                    <input id="image" name="image" type="file" accept="image/*"
                         class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
+
+                    <div id="imagePreviewWrapper" class="mt-3 hidden">
+                        <img id="imagePreview" src="" alt="Preview"
+                            class="h-24 w-auto rounded-lg border border-gray-200 object-cover dark:border-gray-700" />
+                    </div>
                 </div>
+
                 <div>
                     <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Created By</label>
-                    <select id="created_by" name="created_by"
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white">
+                    <select id="created_by" disabled
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-500 focus:border-blue-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                         <option value="{{ auth()->id() }}" selected>{{ auth()->user()->name }}</option>
                     </select>
                 </div>

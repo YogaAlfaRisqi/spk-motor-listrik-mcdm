@@ -22,7 +22,13 @@ class UpdateAlternativeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_motor'      => 'required|string',
+            'harga'           => 'required|integer',
+            'jarak_tempuh'    => 'required|integer',
+            'waktu_pengisian' => 'required|integer',
+            'kapasitas_baterai' => 'required|numeric',
+            'daya_maksimum'   => 'required|numeric',
+            'image'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 }

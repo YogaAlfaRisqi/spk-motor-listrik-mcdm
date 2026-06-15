@@ -61,25 +61,20 @@ class AnalisisPage extends Component
     ];
 
     // ─── Lifecycle ───────────────────────────────────────────────────────────
-
     public function mount(): void
     {
         // 1) ambil dari query string  ?ids=1,2,3  atau  ?ids[]=1&ids[]=2
         $ids = request()->query('ids', []);
-
         if (is_string($ids) && $ids !== '') {
             $ids = explode(',', $ids);
         }
-
         $fromQuery = array_values(
             array_filter(array_map('intval', (array) $ids))
         );
-
         // 2) Fallback ke session yang di-set oleh MotorPage
         if (empty($fromQuery)) {
             $fromQuery = session('analisis_selected_ids', []);
         }
-
         $this->selectedIds = $fromQuery;
     }
 

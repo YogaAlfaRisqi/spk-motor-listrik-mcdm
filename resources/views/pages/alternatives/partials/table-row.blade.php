@@ -43,10 +43,13 @@
     <!-- Gambar -->
     <td class="px-4 py-4 whitespace-nowrap">
         <div class="text-sm text-gray-600 dark:text-gray-300">
-            @if ($alternative->gambar)
-                <img src="{{ asset('storage/' . $alternative->gambar) }}" alt="{{ $alternative->nama_motor }}" class="w-16 h-auto rounded">
+            @if ($alternative->image)
+            <img
+                src="{{ asset('storage/' . $alternative->image) }}"
+                alt="{{ $alternative->nama_motor }}"
+                class="w-16 h-auto rounded">
             @else
-                <span class="text-gray-400 italic">No Image</span>
+            <span class="text-gray-400 italic">No Image</span>
             @endif
         </div>
     </td>
@@ -71,6 +74,7 @@
                 data-waktu-pengisian="{{ $alternative->waktu_pengisian }}"
                 data-kapasitas-baterai="{{ $alternative->kapasitas_baterai }}"
                 data-daya-maksimum="{{ $alternative->daya_maksimum }}"
+                data-image="{{ $alternative->image ? asset('storage/' . $alternative->image) : '' }}"
                 data-update-url="{{ route('admin.alternatives.update', $alternative->id_motor) }}">
 
                 <!-- Pencil Icon -->

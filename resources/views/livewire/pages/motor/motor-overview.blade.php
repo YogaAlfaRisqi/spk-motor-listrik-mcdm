@@ -13,59 +13,54 @@
                     {{-- Grid motor --}}
                     <div class="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
                         @forelse ($motors as $m)
-                            <div
-                                id="card-{{ $m->id_motor }}"
-                                class="motor-card flex flex-col bg-[#14161A] border border-white/5 rounded-2xl overflow-hidden group"
-                                data-id="{{ $m->id_motor }}"
-                            >
-                                {{-- Gambar --}}
-                                <div class="aspect-square bg-[#1a1d23] overflow-hidden">
-                                    <img
-                                        src="{{ $m->image ?: '/images/404 image.png' }}"
-                                        alt="{{ $m->nama_motor }}"
-                                        class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700"
-                                        loading="lazy"
-                                    >
+                        <div
+                            id="card-{{ $m->id_motor }}"
+                            class="motor-card flex flex-col bg-[#14161A] border border-white/5 rounded-2xl overflow-hidden group"
+                            data-id="{{ $m->id_motor }}">
+                            {{-- Gambar --}}
+                            <img
+                                src="{{ $m->image ? asset('storage/' . $m->image) : asset('images/404 image.png') }}"
+                                alt="{{ $m->nama_motor }}"
+                                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700"
+                                loading="lazy">
+
+                            {{-- Body --}}
+                            <div class="card-body-pad p-4 sm:p-5 flex flex-col flex-1">
+                                <h3 class="card-name font-syne font-bold text-base sm:text-lg mb-1 group-hover:text-[#C8F135] transition">
+                                    {{ $m->nama_motor }}
+                                </h3>
+
+                                <p class="text-[#C8F135] font-black text-sm sm:text-base mb-4 font-syne">
+                                    {{ $m->harga }}
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-1.5 mb-4">
+                                    <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
+                                        <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Jarak</p>
+                                        <p class="text-[10px] sm:text-xs font-bold">{{ $m->jarak_tempuh }}</p>
+                                    </div>
+                                    <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
+                                        <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Top Speed</p>
+                                        <p class="text-[10px] sm:text-xs font-bold">{{ $m->daya_maksimum }}</p>
+                                    </div>
                                 </div>
 
-                                {{-- Body --}}
-                                <div class="card-body-pad p-4 sm:p-5 flex flex-col flex-1">
-                                    <h3 class="card-name font-syne font-bold text-base sm:text-lg mb-1 group-hover:text-[#C8F135] transition">
-                                        {{ $m->nama_motor }}
-                                    </h3>
-
-                                    <p class="text-[#C8F135] font-black text-sm sm:text-base mb-4 font-syne">
-                                        {{ $m->harga }}
-                                    </p>
-
-                                    <div class="grid grid-cols-2 gap-1.5 mb-4">
-                                        <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
-                                            <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Jarak</p>
-                                            <p class="text-[10px] sm:text-xs font-bold">{{ $m->jarak_tempuh }}</p>
-                                        </div>
-                                        <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
-                                            <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Top Speed</p>
-                                            <p class="text-[10px] sm:text-xs font-bold">{{ $m->daya_maksimum }}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="mt-auto">
-                                        <button
-                                            id="btn-{{ $m->id_motor }}"
-                                            onclick="toggleMotor({{ $m->id_motor }}, '{{ addslashes($m->nama_motor) }}', '{{ addslashes($m->harga) }}', '{{ $m->image ?: '/images/404 image.png' }}')"
-                                            class="btn-compare w-full py-2.5 border border-[#C8F135]/50 text-[#C8F135] rounded-xl font-bold text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-[#C8F135] hover:text-black transition flex items-center justify-center gap-1.5"
-                                        >
-                                            <span class="text-base">+</span> Bandingkan
-                                        </button>
-                                    </div>
+                                <div class="mt-auto">
+                                    <button
+                                        id="btn-{{ $m->id_motor }}"
+                                        onclick="toggleMotor({{ $m->id_motor }}, '{{ addslashes($m->nama_motor) }}', '{{ addslashes($m->harga) }}', '{{ $m->image ?: '/images/404 image.png' }}')"
+                                        class="btn-compare w-full py-2.5 border border-[#C8F135]/50 text-[#C8F135] rounded-xl font-bold text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-[#C8F135] hover:text-black transition flex items-center justify-center gap-1.5">
+                                        <span class="text-base">+</span> Bandingkan
+                                    </button>
                                 </div>
                             </div>
+                        </div>
                         @empty
-                            <div class="col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-24 text-center">
-                                <div class="text-5xl mb-4">🔍</div>
-                                <p class="font-syne font-bold text-white text-lg mb-2">Motor tidak ditemukan</p>
-                                <p class="text-gray-500 text-sm">Coba ubah filter pencarian kamu.</p>
-                            </div>
+                        <div class="col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-24 text-center">
+                            <div class="text-5xl mb-4">🔍</div>
+                            <p class="font-syne font-bold text-white text-lg mb-2">Motor tidak ditemukan</p>
+                            <p class="text-gray-500 text-sm">Coba ubah filter pencarian kamu.</p>
+                        </div>
                         @endforelse
                     </div>
 
@@ -88,8 +83,7 @@
             opacity: 0;
             transition: transform .45s cubic-bezier(.34,1.3,.64,1), opacity .3s;
             pointer-events: none;
-        "
-    >
+        ">
         <div class="bg-[#14161A] border border-[#C8F135]/30 rounded-2xl p-3 flex flex-col gap-3">
 
             {{-- Top row --}}
@@ -141,13 +135,27 @@
 @push('scripts')
 <style>
     /* ── scrollbar hide ── */
-    #barItems::-webkit-scrollbar { display: none; }
+    #barItems::-webkit-scrollbar {
+        display: none;
+    }
 
     /* ── card states ── */
-    .motor-card { transition: border-color .2s; }
-    .motor-card:hover { border-color: rgba(200,241,53,.3); }
-    .motor-card.is-selected { border-color: rgba(200,241,53,.6) !important; }
-    .motor-card.is-selected .card-name { color: #C8F135; }
+    .motor-card {
+        transition: border-color .2s;
+    }
+
+    .motor-card:hover {
+        border-color: rgba(200, 241, 53, .3);
+    }
+
+    .motor-card.is-selected {
+        border-color: rgba(200, 241, 53, .6) !important;
+    }
+
+    .motor-card.is-selected .card-name {
+        color: #C8F135;
+    }
+
     .motor-card.is-selected .btn-compare {
         background: #C8F135;
         color: #000;
@@ -160,115 +168,165 @@
         display: flex;
         align-items: center;
         gap: 7px;
-        background: rgba(255,255,255,.04);
-        border: 1px solid rgba(255,255,255,.08);
+        background: rgba(255, 255, 255, .04);
+        border: 1px solid rgba(255, 255, 255, .08);
         border-radius: 12px;
         padding: 5px 24px 5px 5px;
         min-width: 152px;
         max-width: 180px;
         position: relative;
     }
+
     .bar-chip img {
-        width: 38px; height: 38px;
-        border-radius: 8px; object-fit: cover; flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
     }
-    .bar-chip-info { flex: 1; min-width: 0; }
+
+    .bar-chip-info {
+        flex: 1;
+        min-width: 0;
+    }
+
     .bar-chip-name {
-        font-size: 10px; font-weight: 700;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #fff;
     }
-    .bar-chip-price { font-size: 9px; color: #C8F135; font-weight: 600; margin-top: 2px; }
+
+    .bar-chip-price {
+        font-size: 9px;
+        color: #C8F135;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+
     .bar-chip-remove {
-        position: absolute; top: -6px; right: -6px;
-        width: 16px; height: 16px;
-        background: #ef4444; border-radius: 50%; border: none;
-        cursor: pointer; color: #fff; font-size: 9px; font-weight: 800;
-        display: flex; align-items: center; justify-content: center;
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 16px;
+        height: 16px;
+        background: #ef4444;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: background .15s;
     }
-    .bar-chip-remove:hover { background: #dc2626; }
+
+    .bar-chip-remove:hover {
+        background: #dc2626;
+    }
 
     /* ── mobile card compact ── */
     @media (max-width: 639px) {
-        .card-body-pad    { padding: 12px !important; }
-        .card-name        { font-size: 13px !important; }
-        .spec-box         { padding: 6px 8px !important; }
-        .btn-compare      { padding-top: 8px !important; padding-bottom: 8px !important; font-size: 9px !important; }
+        .card-body-pad {
+            padding: 12px !important;
+        }
+
+        .card-name {
+            font-size: 13px !important;
+        }
+
+        .spec-box {
+            padding: 6px 8px !important;
+        }
+
+        .btn-compare {
+            padding-top: 8px !important;
+            padding-bottom: 8px !important;
+            font-size: 9px !important;
+        }
     }
 </style>
 
 <script>
-(function () {
-    /* ─── STATE ─── */
-    // map: id_motor (Number) → { name, price, img }
-    const selected = new Map();
+    (function() {
+        /* ─── STATE ─── */
+        // map: id_motor (Number) → { name, price, img }
+        const selected = new Map();
 
-    /* ─── TOGGLE ─── */
-    window.toggleMotor = function (id, name, price, img) {
-        if (selected.has(id)) {
+        /* ─── TOGGLE ─── */
+        window.toggleMotor = function(id, name, price, img) {
+            if (selected.has(id)) {
+                selected.delete(id);
+            } else {
+                selected.set(id, {
+                    name,
+                    price,
+                    img
+                });
+            }
+            syncCard(id);
+            renderBar();
+        };
+
+        window.removeMotor = function(id) {
             selected.delete(id);
-        } else {
-            selected.set(id, { name, price, img });
-        }
-        syncCard(id);
-        renderBar();
-    };
+            syncCard(id);
+            renderBar();
+        };
 
-    window.removeMotor = function (id) {
-        selected.delete(id);
-        syncCard(id);
-        renderBar();
-    };
+        window.clearSelection = function() {
+            const ids = [...selected.keys()];
+            selected.clear();
+            ids.forEach(syncCard);
+            renderBar();
+        };
 
-    window.clearSelection = function () {
-        const ids = [...selected.keys()];
-        selected.clear();
-        ids.forEach(syncCard);
-        renderBar();
-    };
+        window.prosesPerbandingan = function() {
+            if (selected.size < 2) {
+                alert('Pilih minimal 2 motor untuk dibandingkan.');
+                return;
+            }
+            const qs = [...selected.keys()].map(id => `ids[]=${id}`).join('&');
+            window.location.href = '/motor/compare?' + qs;
+        };
 
-    window.prosesPerbandingan = function () {
-        if (selected.size < 2) {
-            alert('Pilih minimal 2 motor untuk dibandingkan.');
-            return;
-        }
-        const qs = [...selected.keys()].map(id => `ids[]=${id}`).join('&');
-        window.location.href = '/motor/compare?' + qs;
-    };
+        /* ─── SYNC CARD DOM ─── */
+        function syncCard(id) {
+            const card = document.getElementById(`card-${id}`);
+            const btn = document.getElementById(`btn-${id}`);
+            if (!card || !btn) return;
 
-    /* ─── SYNC CARD DOM ─── */
-    function syncCard(id) {
-        const card = document.getElementById(`card-${id}`);
-        const btn  = document.getElementById(`btn-${id}`);
-        if (!card || !btn) return;
+            const on = selected.has(id);
+            card.classList.toggle('is-selected', on);
 
-        const on = selected.has(id);
-        card.classList.toggle('is-selected', on);
-
-        if (on) {
-            btn.innerHTML = '<span class="text-sm">✓</span> Terpilih';
-        } else {
-            btn.innerHTML = '<span class="text-base">+</span> Bandingkan';
-        }
-    }
-
-    /* ─── FLOATING BAR ─── */
-    function renderBar() {
-        const bar      = document.getElementById('spkBar');
-        const barItems = document.getElementById('barItems');
-        document.getElementById('countMotor').textContent = selected.size;
-
-        if (selected.size === 0) {
-            bar.style.transform    = 'translateX(-50%) translateY(140px)';
-            bar.style.opacity      = '0';
-            bar.style.pointerEvents = 'none';
-        } else {
-            bar.style.transform    = 'translateX(-50%) translateY(0)';
-            bar.style.opacity      = '1';
-            bar.style.pointerEvents = 'auto';
+            if (on) {
+                btn.innerHTML = '<span class="text-sm">✓</span> Terpilih';
+            } else {
+                btn.innerHTML = '<span class="text-base">+</span> Bandingkan';
+            }
         }
 
-        barItems.innerHTML = [...selected.entries()].map(([id, m]) => `
+        /* ─── FLOATING BAR ─── */
+        function renderBar() {
+            const bar = document.getElementById('spkBar');
+            const barItems = document.getElementById('barItems');
+            document.getElementById('countMotor').textContent = selected.size;
+
+            if (selected.size === 0) {
+                bar.style.transform = 'translateX(-50%) translateY(140px)';
+                bar.style.opacity = '0';
+                bar.style.pointerEvents = 'none';
+            } else {
+                bar.style.transform = 'translateX(-50%) translateY(0)';
+                bar.style.opacity = '1';
+                bar.style.pointerEvents = 'auto';
+            }
+
+            barItems.innerHTML = [...selected.entries()].map(([id, m]) => `
             <div class="bar-chip">
                 <img src="${m.img}" alt="${m.name}">
                 <div class="bar-chip-info">
@@ -279,73 +337,85 @@
             </div>
         `).join('');
 
-        requestAnimationFrame(syncScrollUI);
-    }
+            requestAnimationFrame(syncScrollUI);
+        }
 
-    /* ─── SCROLL ARROWS ─── */
-    function syncScrollUI() {
-        const el   = document.getElementById('barItems');
-        const btnL = document.getElementById('btnLeft');
-        const btnR = document.getElementById('btnRight');
-        const fL   = document.getElementById('fadeLeft');
-        const fR   = document.getElementById('fadeRight');
-        if (!el) return;
+        /* ─── SCROLL ARROWS ─── */
+        function syncScrollUI() {
+            const el = document.getElementById('barItems');
+            const btnL = document.getElementById('btnLeft');
+            const btnR = document.getElementById('btnRight');
+            const fL = document.getElementById('fadeLeft');
+            const fR = document.getElementById('fadeRight');
+            if (!el) return;
 
-        const over    = el.scrollWidth > el.clientWidth + 2;
-        const atStart = el.scrollLeft <= 2;
-        const atEnd   = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
-        const tog = (n, v) => n.classList.toggle('hidden', !v);
+            const over = el.scrollWidth > el.clientWidth + 2;
+            const atStart = el.scrollLeft <= 2;
+            const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+            const tog = (n, v) => n.classList.toggle('hidden', !v);
 
-        tog(btnL, over && !atStart);
-        tog(btnR, over && !atEnd);
-        tog(fL,   over && !atStart);
-        tog(fR,   over && !atEnd);
-    }
+            tog(btnL, over && !atStart);
+            tog(btnR, over && !atEnd);
+            tog(fL, over && !atStart);
+            tog(fR, over && !atEnd);
+        }
 
-    window.slideBar = function (dir) {
-        document.getElementById('barItems').scrollBy({ left: dir * 180, behavior: 'smooth' });
-    };
+        window.slideBar = function(dir) {
+            document.getElementById('barItems').scrollBy({
+                left: dir * 180,
+                behavior: 'smooth'
+            });
+        };
 
-    /* ─── DRAG TO SCROLL ─── */
-    const barItems = document.getElementById('barItems');
-    let drag = false, sx = 0, ss = 0;
-    barItems.addEventListener('mousedown', e => {
-        drag = true; sx = e.pageX; ss = barItems.scrollLeft;
-        barItems.style.cursor = 'grabbing';
-        e.preventDefault();
-    });
-    document.addEventListener('mousemove', e => {
-        if (drag) barItems.scrollLeft = ss - (e.pageX - sx);
-    });
-    document.addEventListener('mouseup', () => {
-        drag = false;
-        barItems.style.cursor = 'grab';
-    });
-    barItems.addEventListener('scroll', syncScrollUI);
-    window.addEventListener('resize', syncScrollUI);
+        /* ─── DRAG TO SCROLL ─── */
+        const barItems = document.getElementById('barItems');
+        let drag = false,
+            sx = 0,
+            ss = 0;
+        barItems.addEventListener('mousedown', e => {
+            drag = true;
+            sx = e.pageX;
+            ss = barItems.scrollLeft;
+            barItems.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+        document.addEventListener('mousemove', e => {
+            if (drag) barItems.scrollLeft = ss - (e.pageX - sx);
+        });
+        document.addEventListener('mouseup', () => {
+            drag = false;
+            barItems.style.cursor = 'grab';
+        });
+        barItems.addEventListener('scroll', syncScrollUI);
+        window.addEventListener('resize', syncScrollUI);
 
-    /*
-     * ─── LIVEWIRE HOOK ───
-     * Setelah Livewire re-render (filter/halaman berubah):
-     * 1. Scroll ke atas
-     * 2. Sync visual kartu yang masih terpilih
-     */
-    document.addEventListener('livewire:navigated', syncAllCards);
+        /*
+         * ─── LIVEWIRE HOOK ───
+         * Setelah Livewire re-render (filter/halaman berubah):
+         * 1. Scroll ke atas
+         * 2. Sync visual kartu yang masih terpilih
+         */
+        document.addEventListener('livewire:navigated', syncAllCards);
 
-    if (typeof Livewire !== 'undefined') {
-        Livewire.hook('commit', ({ succeed }) => {
-            succeed(() => {
-                requestAnimationFrame(() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    syncAllCards();
+        if (typeof Livewire !== 'undefined') {
+            Livewire.hook('commit', ({
+                succeed
+            }) => {
+                succeed(() => {
+                    requestAnimationFrame(() => {
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                        syncAllCards();
+                    });
                 });
             });
-        });
-    }
+        }
 
-    function syncAllCards() {
-        selected.forEach((_, id) => syncCard(id));
-    }
-})();
+        function syncAllCards() {
+            selected.forEach((_, id) => syncCard(id));
+        }
+    })();
 </script>
 @endpush

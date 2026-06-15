@@ -3,19 +3,22 @@
 namespace App\Services;
 
 use App\Models\MotorListrik;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class MotorService
 {
+    public const PER_PAGE = 12;
+
     /**
-     * Ambil semua motor dengan filter dan sorting.
+     * Ambil motor dengan filter, sorting, dan pagination.
      */
     public function getFiltered(
-        string $sort = 'terbaru',
-        int $maxHarga = 100,
-        array $brands = [],
-        int $battery = 0
-    ): Collection {
+        string $sort     = 'terbaru',
+        int    $maxHarga = 100,
+        array  $brands   = [],
+        int    $battery  = 0,
+        int    $perPage  = self::PER_PAGE,
+    ): LengthAwarePaginator {
         $query = MotorListrik::query();
 
         $this->applyBrandFilter($query, $brands);
@@ -23,17 +26,12 @@ class MotorService
         $this->applyBatteryFilter($query, $battery);
         $this->applySorting($query, $sort);
 
-        return $query->get();
+        return $query->paginate($perPage);
     }
 
-    /**
-     * Filter berdasarkan brand (nama motor mengandung nama brand).
-     */
     private function applyBrandFilter($query, array $brands): void
     {
-        if (empty($brands)) {
-            return;
-        }
+        if (empty($brands)) return;
 
         $query->where(function ($q) use ($brands) {
             foreach ($brands as $brand) {
@@ -42,18 +40,11 @@ class MotorService
         });
     }
 
-    /**
-     * Filter berdasarkan harga maksimum (dalam juta rupiah).
-     */
     private function applyPriceFilter($query, int $maxHarga): void
     {
         $query->where('harga', '<=', $maxHarga * 1_000_000);
     }
 
-    /**
-     * Filter berdasarkan kapasitas baterai.
-     * 0 = Semua, 1 = < 2.0, 2 = 2.0–3.0, 3 = > 3.0
-     */
     private function applyBatteryFilter($query, int $battery): void
     {
         match ($battery) {
@@ -64,9 +55,6 @@ class MotorService
         };
     }
 
-    /**
-     * Terapkan sorting berdasarkan pilihan pengguna.
-     */
     private function applySorting($query, string $sort): void
     {
         match ($sort) {

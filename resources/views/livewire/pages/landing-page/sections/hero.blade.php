@@ -67,58 +67,34 @@
                 </div>
 
                 <div class="motor-list">
+                    @foreach($rankingROC as $index => $motor)
                     <div class="motor-item">
-                        <div class="motor-rank">1</div>
-                        <div class="motor-info">
-                            <div class="motor-name">Honda EM1 e:</div>
-                            <div class="motor-brand">Honda • Rp 30,5 Jt</div>
+                        <div class="motor-rank">
+                            {{ $index + 1 }}
                         </div>
+
+                        <div class="motor-info">
+                            <div class="motor-name">
+                                {{ $motor['nama_motor'] }}
+                            </div>
+                            <div class="motor-brand">
+                                {{ explode(' ', $motor['nama_motor'])[0] }}
+                            </div>
+                        </div>
+
                         <div class="motor-score-bar">
-                            <div class="motor-score">0.847</div>
+                            <div class="motor-score">
+                                {{ number_format($motor['score'],3) }}
+                            </div>
+
                             <div class="bar-bg">
-                                <div class="bar-fill" style="width:84.7%"></div>
+                                <div class="bar-fill"
+                                    style="width: {{ $motor['score'] * 100 }}%">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="motor-item">
-                        <div class="motor-rank">2</div>
-                        <div class="motor-info">
-                            <div class="motor-name">Gesits G1</div>
-                            <div class="motor-brand">Gesits • Rp 28,4 Jt</div>
-                        </div>
-                        <div class="motor-score-bar">
-                            <div class="motor-score">0.762</div>
-                            <div class="bar-bg">
-                                <div class="bar-fill" style="width:76.2%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="motor-item">
-                        <div class="motor-rank">3</div>
-                        <div class="motor-info">
-                            <div class="motor-name">Alva One</div>
-                            <div class="motor-brand">Alva • Rp 27,9 Jt</div>
-                        </div>
-                        <div class="motor-score-bar">
-                            <div class="motor-score">0.714</div>
-                            <div class="bar-bg">
-                                <div class="bar-fill" style="width:71.4%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="motor-item">
-                        <div class="motor-rank">4</div>
-                        <div class="motor-info">
-                            <div class="motor-name">Polytron Fox-R</div>
-                            <div class="motor-brand">Polytron • Rp 19,5 Jt</div>
-                        </div>
-                        <div class="motor-score-bar">
-                            <div class="motor-score">0.651</div>
-                            <div class="bar-bg">
-                                <div class="bar-fill" style="width:65.1%"></div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 

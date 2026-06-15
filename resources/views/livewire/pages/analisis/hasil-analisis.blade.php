@@ -140,7 +140,7 @@
                             @foreach($this->motors as $motor)
                                 <th class="p-4 text-left min-w-[200px]">
                                     <div class="flex items-center gap-3">
-                                        <img src="{{ $motor->image ?: '/images/404 image.png' }}"
+                                        <img src="{{ $motor->image ? Storage::url($motor->image) : asset('images/404-image.png') }}"
                                              alt="{{ $motor->nama_motor }}"
                                              class="w-12 h-12 object-cover rounded-lg bg-[#1a1d23] flex-shrink-0">
                                         <div>

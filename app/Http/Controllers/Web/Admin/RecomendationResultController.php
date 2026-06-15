@@ -66,8 +66,6 @@ class RecomendationResultController extends Controller
         $alternatives = $this->alternativeService->getCollection();
         // bobot
         $weights   = $this->weightService->getAllMethods($criterias);
-        // for calculation
-        // 🔥 HITUNG SPK (PAKAI BOBOT DARI ATAS)
         $result = $this->calculationService->calculate(
             $alternatives,
             $columns,

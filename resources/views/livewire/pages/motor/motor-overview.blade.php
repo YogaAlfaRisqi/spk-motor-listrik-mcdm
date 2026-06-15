@@ -1,20 +1,77 @@
 <div class="relative">
     @include('livewire.pages.motor.partials.hero')
+
     <div class="pt-10 min-h-screen bg-[#0A0C0F] text-white">
         <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pb-48">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- partials for sidebar -->
+
+                {{-- Sidebar filter --}}
                 @include('livewire.pages.motor.partials.sidebar')
+
                 <main class="lg:col-span-9">
-                    <!-- Grid motor for content -->
-                    <div id="motorGrid" class="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5 lg:gap-6"></div>
-                    <!-- pagination -->
-                    <div id="pagination" class="flex items-center justify-center gap-2 mt-8 flex-wrap"></div>
+
+                    {{-- Grid motor --}}
+                    <div class="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-5 lg:gap-6">
+                        @forelse ($motors as $m)
+                        <div
+                            id="card-{{ $m->id_motor }}"
+                            class="motor-card flex flex-col bg-[#14161A] border border-white/5 rounded-2xl overflow-hidden group"
+                            data-id="{{ $m->id_motor }}">
+                            {{-- Gambar --}}
+                            <div class="aspect-square bg-[#1a1d23] overflow-hidden">
+                                <img
+                                    src="{{ $m->image ?: '/images/404 image.png' }}"
+                                    alt="{{ $m->nama_motor }}"
+                                    class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700"
+                                    loading="lazy">
+                            </div>
+
+                            {{-- Body --}}
+                            <div class="card-body-pad p-4 sm:p-5 flex flex-col flex-1">
+                                <h3 class="card-name font-syne font-bold text-base sm:text-lg mb-1 group-hover:text-[#C8F135] transition">
+                                    {{ $m->nama_motor }}
+                                </h3>
+
+                                <p class="text-[#C8F135] font-black text-sm sm:text-base mb-4 font-syne">
+                                    {{ $m->harga }}
+                                </p>
+
+                                <div class="grid grid-cols-2 gap-1.5 mb-4">
+                                    <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
+                                        <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Jarak</p>
+                                        <p class="text-[10px] sm:text-xs font-bold">{{ $m->jarak_tempuh }}</p>
+                                    </div>
+                                    <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
+                                        <p class="text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Top Speed</p>
+                                        <p class="text-[10px] sm:text-xs font-bold">{{ $m->daya_maksimum }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto">
+                                    <button
+                                        id="btn-{{ $m->id_motor }}"
+                                        onclick="toggleMotor({{ $m->id_motor }}, '{{ addslashes($m->nama_motor) }}', '{{ addslashes($m->harga) }}', '{{ $m->image ?: '/images/404 image.png' }}')"
+                                        class="btn-compare w-full py-2.5 border border-[#C8F135]/50 text-[#C8F135] rounded-xl font-bold text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-[#C8F135] hover:text-black transition flex items-center justify-center gap-1.5">
+                                        <span class="text-base">+</span> Bandingkan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="col-span-2 xl:col-span-3 flex flex-col items-center justify-center py-24 text-center">
+                            <div class="text-5xl mb-4">🔍</div>
+                            <p class="font-syne font-bold text-white text-lg mb-2">Motor tidak ditemukan</p>
+                            <p class="text-gray-500 text-sm">Coba ubah filter pencarian kamu.</p>
+                        </div>
+                        @endforelse
+                    </div>
+
                 </main>
             </div>
         </div>
     </div>
-    <!-- Floating Bar -->
+
+    {{-- Floating Bar --}}
     <div
         id="spkBar"
         class="fixed bottom-4 left-1/2 z-50"
@@ -36,10 +93,14 @@
                 <div class="flex items-center gap-2">
                     <button
                         onclick="clearSelection()"
-                        class="text-[10px] font-semibold text-white/40 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded-full transition">Hapus semua</button>
+                        class="text-[10px] font-semibold text-white/40 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded-full transition">
+                        Hapus semua
+                    </button>
                     <button
                         onclick="prosesPerbandingan()"
-                        class="text-[10px] font-extrabold tracking-wide bg-[#C8F135] text-black px-4 py-1.5 rounded-full hover:bg-[#d9f540] transition">Bandingkan</button>
+                        class="text-[10px] font-extrabold tracking-wide bg-[#C8F135] text-black px-4 py-1.5 rounded-full hover:bg-[#d9f540] transition">
+                        Bandingkan
+                    </button>
                 </div>
             </div>
 
@@ -98,47 +159,6 @@
         background: #C8F135;
         color: #000;
         border-color: #C8F135;
-    }
-
-    /* ── pagination button ── */
-    .pg-btn {
-        min-width: 34px;
-        height: 34px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: 700;
-        border: 1px solid rgba(255, 255, 255, .08);
-        background: #14161A;
-        color: rgba(255, 255, 255, .5);
-        cursor: pointer;
-        transition: all .15s;
-        padding: 0 8px;
-    }
-
-    .pg-btn:hover {
-        border-color: rgba(200, 241, 53, .4);
-        color: #C8F135;
-    }
-
-    .pg-btn.active {
-        background: #C8F135;
-        color: #000;
-        border-color: #C8F135;
-    }
-
-    .pg-btn:disabled {
-        opacity: .3;
-        cursor: default;
-        pointer-events: none;
-    }
-
-    .pg-dots {
-        color: rgba(255, 255, 255, .25);
-        font-size: 12px;
-        padding: 0 4px;
     }
 
     /* ── chip ── */
@@ -214,25 +234,12 @@
             padding: 12px !important;
         }
 
-        .card-title {
+        .card-name {
             font-size: 13px !important;
-        }
-
-        .card-price-txt {
-            font-size: 12px !important;
-            margin-bottom: 10px !important;
         }
 
         .spec-box {
             padding: 6px 8px !important;
-        }
-
-        .spec-label-txt {
-            font-size: 7px !important;
-        }
-
-        .spec-val-txt {
-            font-size: 10px !important;
         }
 
         .btn-compare {
@@ -245,175 +252,70 @@
 
 <script>
     (function() {
-        /* ─────────────── DATA (dari PHP via JSON) ─────────────── */
-        const ALL_MOTORS = @json($motors);
-        const PER_PAGE = 12;
-        let currentPage = 1;
-        let selected = [];
+        /* ─── STATE ─── */
+        // map: id_motor (Number) → { name, price, img }
+        const selected = new Map();
 
-        /* ─────────────── RENDER GRID ─────────────── */
-        function renderGrid() {
-            const start = (currentPage - 1) * PER_PAGE;
-            const slice = ALL_MOTORS.slice(start, start + PER_PAGE);
-            const grid = document.getElementById('motorGrid');
-
-            grid.innerHTML = slice.map(m => {
-                const sel = selected.includes(m.id_motor);
-                return `
-            <div
-                id="card-${m.id_motor}"
-                class="motor-card${sel ? ' is-selected' : ''} flex flex-col bg-[#14161A] border border-white/5 rounded-2xl overflow-hidden group"
-                data-id="${m.id_motor}" data-name="${m.nama_motor}" data-price="${m.harga}" data-img="${m.image}"
-            >
-                <div class="aspect-square bg-[#1a1d23] overflow-hidden">
-                    <img src="${m.image ? m.image : '/images/404 image.png'}" alt="${m.nama_motor}"
-                         class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition duration-700"
-                         loading="lazy">
-                </div>
-                <div class="card-body-pad p-4 sm:p-5 flex flex-col flex-1">
-                    <h3 class="card-name card-title font-syne font-bold text-base sm:text-lg mb-1 group-hover:text-[#C8F135] transition">
-                        ${m.nama_motor}
-                    </h3>
-                    <p class="card-price-txt text-[#C8F135] font-black text-sm sm:text-base mb-4 font-syne">
-                        ${m.harga}
-                    </p>
-                    <div class="grid grid-cols-2 gap-1.5 mb-4">
-                        <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
-                            <p class="spec-label-txt text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Jarak</p>
-                            <p class="spec-val-txt text-[10px] sm:text-xs font-bold">${m.jarak_tempuh}</p>
-                        </div>
-                        <div class="spec-box bg-[#0A0C0F] p-2.5 rounded-xl border border-white/5">
-                            <p class="spec-label-txt text-[7px] sm:text-[8px] text-gray-500 uppercase font-bold mb-0.5">Top Speed</p>
-                            <p class="spec-val-txt text-[10px] sm:text-xs font-bold">${m.daya_maksimum}</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto">
-                        <button
-                            id="btn-${m.id_motor}"
-                            onclick="toggleMotor(${m.id_motor})"
-                            class="btn-compare w-full py-2.5 border border-[#C8F135]/50 text-[#C8F135] rounded-xl font-bold text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-[#C8F135] hover:text-black transition flex items-center justify-center gap-1.5
-                                   ${sel ? 'bg-[#C8F135] !text-black !border-[#C8F135]' : ''}"
-                        >
-                            ${sel
-                                ? '<span class="text-sm">✓</span> Terpilih'
-                                : '<span class="text-base">+</span> Bandingkan'}
-                        </button>
-                    </div>
-                </div>
-            </div>`;
-            }).join('');
-
-            renderPagination();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        /* ─────────────── PAGINATION ─────────────── */
-        function renderPagination() {
-            const total = Math.ceil(ALL_MOTORS.length / PER_PAGE);
-            if (total <= 1) {
-                document.getElementById('pagination').innerHTML = '';
-                return;
-            }
-
-            const p = currentPage;
-            let html = '';
-
-            /* prev */
-            html += `<button class="pg-btn" onclick="goPage(${p-1})" ${p===1?'disabled':''}>‹</button>`;
-
-            /* page numbers with ellipsis */
-            const pages = buildPageRange(p, total);
-            pages.forEach(n => {
-                if (n === '...') {
-                    html += `<span class="pg-dots">···</span>`;
-                } else {
-                    html += `<button class="pg-btn${n===p?' active':''}" onclick="goPage(${n})">${n}</button>`;
-                }
-            });
-
-            /* next */
-            html += `<button class="pg-btn" onclick="goPage(${p+1})" ${p===total?'disabled':''}>›</button>`;
-
-            document.getElementById('pagination').innerHTML = html;
-        }
-
-        function buildPageRange(current, total) {
-            if (total <= 7) return Array.from({
-                length: total
-            }, (_, i) => i + 1);
-            const r = [];
-            if (current <= 4) {
-                r.push(1, 2, 3, 4, 5, '...', total);
-            } else if (current >= total - 3) {
-                r.push(1, '...', total - 4, total - 3, total - 2, total - 1, total);
+        /* ─── TOGGLE ─── */
+        window.toggleMotor = function(id, name, price, img) {
+            if (selected.has(id)) {
+                selected.delete(id);
             } else {
-                r.push(1, '...', current - 1, current, current + 1, '...', total);
+                selected.set(id, {
+                    name,
+                    price,
+                    img
+                });
             }
-            return r;
-        }
-
-        window.goPage = function(n) {
-            const total = Math.ceil(ALL_MOTORS.length / PER_PAGE);
-            if (n < 1 || n > total) return;
-            currentPage = n;
-            renderGrid();
-        };
-
-        /* ─────────────── TOGGLE / SELECT ─────────────── */
-        window.toggleMotor = function(id) {
-            selected.includes(id) ?
-                (selected = selected.filter(x => x !== id)) :
-                selected.push(id);
             syncCard(id);
             renderBar();
         };
 
         window.removeMotor = function(id) {
-            selected = selected.filter(x => x !== id);
+            selected.delete(id);
             syncCard(id);
             renderBar();
         };
 
         window.clearSelection = function() {
-            const prev = [...selected];
-            selected = [];
-            prev.forEach(syncCard);
+            const ids = [...selected.keys()];
+            selected.clear();
+            ids.forEach(syncCard);
             renderBar();
         };
 
         window.prosesPerbandingan = function() {
-            if (selected.length < 2) {
+            if (selected.size < 2) {
                 alert('Pilih minimal 2 motor untuk dibandingkan.');
                 return;
             }
-            window.location.href = '/motor/compare?' + selected.map(id => `ids[]=${id}`).join('&');
+            const qs = [...selected.keys()].map(id => `ids[]=${id}`).join('&');
+            window.location.href = '/motor/compare?' + qs;
         };
 
+        /* ─── SYNC CARD DOM ─── */
         function syncCard(id) {
             const card = document.getElementById(`card-${id}`);
             const btn = document.getElementById(`btn-${id}`);
             if (!card || !btn) return;
-            const on = selected.includes(id);
+
+            const on = selected.has(id);
             card.classList.toggle('is-selected', on);
+
             if (on) {
-                btn.classList.add('bg-[#C8F135]', '!text-black', '!border-[#C8F135]');
                 btn.innerHTML = '<span class="text-sm">✓</span> Terpilih';
             } else {
-                btn.classList.remove('bg-[#C8F135]', '!text-black', '!border-[#C8F135]');
                 btn.innerHTML = '<span class="text-base">+</span> Bandingkan';
             }
         }
 
-        /* ─────────────── FLOATING BAR ─────────────── */
+        /* ─── FLOATING BAR ─── */
         function renderBar() {
             const bar = document.getElementById('spkBar');
             const barItems = document.getElementById('barItems');
-            document.getElementById('countMotor').textContent = selected.length;
+            document.getElementById('countMotor').textContent = selected.size;
 
-            if (selected.length === 0) {
+            if (selected.size === 0) {
                 bar.style.transform = 'translateX(-50%) translateY(140px)';
                 bar.style.opacity = '0';
                 bar.style.pointerEvents = 'none';
@@ -423,24 +325,21 @@
                 bar.style.pointerEvents = 'auto';
             }
 
-            barItems.innerHTML = selected.map(id => {
-                const m = ALL_MOTORS.find(x => x.id_motor === id);
-                if (!m) return '';
-                return `
-                <div class="bar-chip">
-                    <img src="${m.image ? m.image : '/images/404 image.png'}" alt="${m.nama_motor}">
-                    <div class="bar-chip-info">
-                        <div class="bar-chip-name">${m.nama_motor}</div>
-                        <div class="bar-chip-price">${m.harga}</div>
-                    </div>
-                    <button class="bar-chip-remove" onclick="removeMotor(${id})" aria-label="Hapus ${m.nama_motor}">✕</button>
-                </div>`;
-            }).join('');
+            barItems.innerHTML = [...selected.entries()].map(([id, m]) => `
+            <div class="bar-chip">
+                <img src="${m.img}" alt="${m.name}">
+                <div class="bar-chip-info">
+                    <div class="bar-chip-name">${m.name}</div>
+                    <div class="bar-chip-price">${m.price}</div>
+                </div>
+                <button class="bar-chip-remove" onclick="removeMotor(${id})" aria-label="Hapus ${m.name}">✕</button>
+            </div>
+        `).join('');
 
             requestAnimationFrame(syncScrollUI);
         }
 
-        /* ─────────────── SCROLL ARROWS ─────────────── */
+        /* ─── SCROLL ARROWS ─── */
         function syncScrollUI() {
             const el = document.getElementById('barItems');
             const btnL = document.getElementById('btnLeft');
@@ -448,10 +347,12 @@
             const fL = document.getElementById('fadeLeft');
             const fR = document.getElementById('fadeRight');
             if (!el) return;
+
             const over = el.scrollWidth > el.clientWidth + 2;
             const atStart = el.scrollLeft <= 2;
             const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
             const tog = (n, v) => n.classList.toggle('hidden', !v);
+
             tog(btnL, over && !atStart);
             tog(btnR, over && !atEnd);
             tog(fL, over && !atStart);
@@ -465,7 +366,7 @@
             });
         };
 
-        /* drag-to-scroll */
+        /* ─── DRAG TO SCROLL ─── */
         const barItems = document.getElementById('barItems');
         let drag = false,
             sx = 0,
@@ -487,8 +388,33 @@
         barItems.addEventListener('scroll', syncScrollUI);
         window.addEventListener('resize', syncScrollUI);
 
-        /* ─────────────── INIT ─────────────── */
-        renderGrid();
+        /*
+         * ─── LIVEWIRE HOOK ───
+         * Setelah Livewire re-render (filter berubah), card baru muncul tapi
+         * selected state di JS harus di-sync ulang ke DOM yang fresh.
+         */
+        document.addEventListener('livewire:navigated', syncAllCards);
+
+        if (typeof Livewire !== 'undefined') {
+            Livewire.hook('commit', ({
+                component,
+                commit,
+                respond,
+                succeed,
+                fail
+            }) => {
+                succeed(({
+                    snapshot,
+                    effect
+                }) => {
+                    requestAnimationFrame(syncAllCards);
+                });
+            });
+        }
+
+        function syncAllCards() {
+            selected.forEach((_, id) => syncCard(id));
+        }
     })();
 </script>
 @endpush

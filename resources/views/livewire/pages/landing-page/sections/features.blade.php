@@ -1,5 +1,5 @@
  <!-- ===== FEATURES ===== -->
- <section class="section" id="features">
+ <section class="section" id="about">
      <div class="section-inner">
          <div class="section-label">Keunggulan Sistem</div>
          <h2 class="section-title">Analisis Cerdas, Keputusan Tepat</h2>

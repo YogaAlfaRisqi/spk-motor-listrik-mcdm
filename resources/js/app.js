@@ -112,10 +112,10 @@ function initSPKChart() {
 
         window[`chart_${id}`] = new ApexCharts(lineEl, {
             series: [
-                { name: "EW", data: ew },
-                { name: "RS", data: rs },
-                { name: "RR", data: rr },
-                { name: "ROC", data: roc },
+                { name: "EW-TOPSIS", data: ew },
+                { name: "RS-TOPSIS", data: rs },
+                { name: "RR-TOPSIS", data: rr },
+                { name: "ROC-TOPSIS", data: roc },
             ],
             chart: {
                 type: "line",

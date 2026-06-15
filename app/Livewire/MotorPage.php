@@ -2,34 +2,35 @@
 
 namespace App\Livewire;
 
-use App\Services\AlternativeService;
+use App\Services\MotorService;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
 #[Layout('livewire.layouts.motor')]
 class MotorPage extends Component
 {
-    public string $currentPage = '/';
+    public string $sort     = 'terbaru';
+    public int    $maxHarga = 100;
+    public array  $brands   = [];
+    public int    $battery  = 0;
 
-    public array $motors = [];
-
-    public function mount(AlternativeService $motorService): void
+    public function resetFilter(): void
     {
-        $this->motors = $motorService
-        ->getCollection()
-        ->toArray()
-        ;
+        $this->sort     = 'terbaru';
+        $this->maxHarga = 100;
+        $this->brands   = [];
+        $this->battery  = 0;
     }
 
-    public function navigate(string $page): void
-    {
-        $this->currentPage = $page;
-    }
-
-    public function render()
+    public function render(MotorService $motorService)
     {
         return view('livewire.pages.motor.motor-overview', [
-            'motors' => $this->motors,
+            'motors' => $motorService->getFiltered(
+                sort:     $this->sort,
+                maxHarga: $this->maxHarga,
+                brands:   $this->brands,
+                battery:  $this->battery,
+            ),
         ]);
     }
 }

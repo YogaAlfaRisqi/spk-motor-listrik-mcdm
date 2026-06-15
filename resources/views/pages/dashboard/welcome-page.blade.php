@@ -74,7 +74,6 @@ $cards = [
             :weights="$weights"
         />
       </div>
-
     </div>
 
 
@@ -99,11 +98,8 @@ $cards = [
           Belum ada data perbandingan
         </div>
       @endif
-
     </div>
-
   </div>
-
 </div>
 
 @endsection

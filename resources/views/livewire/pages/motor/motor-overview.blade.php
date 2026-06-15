@@ -48,7 +48,7 @@
                                 <div class="mt-auto">
                                     <button
                                         id="btn-{{ $m->id_motor }}"
-                                        onclick="toggleMotor({{ $m->id_motor }}, '{{ addslashes($m->nama_motor) }}', '{{ addslashes($m->harga) }}', '{{ $m->image ?: '/images/404 image.png' }}')"
+                                        onclick="toggleMotor({{ $m->id_motor }}, '{{ addslashes($m->nama_motor) }}', '{{ addslashes($m->harga) }}', '{{ $m->image ? asset('storage/' . $m->image) : asset('images/404 image.png') }}')"
                                         class="btn-compare w-full py-2.5 border border-[#C8F135]/50 text-[#C8F135] rounded-xl font-bold text-[9px] sm:text-[10px] uppercase tracking-widest hover:bg-[#C8F135] hover:text-black transition flex items-center justify-center gap-1.5">
                                         <span class="text-base">+</span> Bandingkan
                                     </button>

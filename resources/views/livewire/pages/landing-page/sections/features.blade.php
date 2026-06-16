@@ -19,7 +19,7 @@
                          <div class="method-row">
                              <div>
                                  <div class="method-name">EW</div>
-                                 <div class="method-desc-sm">Entropy Weighting + TOPSIS</div>
+                                 <div class="method-desc-sm">Equal Weight + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
                          </div>

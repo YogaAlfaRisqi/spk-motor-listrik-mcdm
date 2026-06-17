@@ -54,8 +54,8 @@
 
         <div class="hero-visual">
             <div class="float-card float-card-1">
-                <div class="float-label">Skor Tertinggi</div>
-                <div class="float-value">0.847</div>
+                <div class="float-label">Skor Tertinggi ROC</div>
+                <!-- <div class="float-value">0.847</div> -->
             </div>
 
             <div class="score-card">

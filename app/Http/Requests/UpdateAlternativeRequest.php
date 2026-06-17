@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateAlternativeRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'nama_motor'      => 'required|string',
+            'harga'           => 'required|integer',
+            'jarak_tempuh'    => 'required|integer',
+            'waktu_pengisian' => 'required|integer',
+            'kapasitas_baterai' => 'required|numeric',
+            'daya_maksimum'   => 'required|numeric',
+            'image'             => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5000',
+        ];
+    }
+}

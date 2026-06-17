@@ -27,7 +27,7 @@
                          <div class="method-row">
                              <div>
                                  <div class="method-name">RS</div>
-                                 <div class="method-desc-sm">Rank Sum Weighting + TOPSIS</div>
+                                 <div class="method-desc-sm">Rank Sum + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
                          </div>
@@ -35,7 +35,7 @@
                          <div class="method-row">
                              <div>
                                  <div class="method-name">RR</div>
-                                 <div class="method-desc-sm">Rank Reciprocal Weighting + TOPSIS</div>
+                                 <div class="method-desc-sm">Rank Reciprocal + TOPSIS</div>
                              </div>
                              <div class="method-indicator"></div>
                          </div>
@@ -49,7 +49,7 @@
                          </div>
                      </div>
                      <div>
-                         <div class="feature-desc"> Sistem ini membandingkan berbagai teknik pembobotan kriteria seperti Entropy, Rank Sum, Rank Reciprocal, dan Rank Order Centroid yang dikombinasikan dengan metode TOPSIS untuk menghasilkan peringkat alternatif yang lebih objektif dan konsisten.</div>
+                         <div class="feature-desc"> Sistem ini membandingkan berbagai teknik pembobotan kriteria seperti Equal Weight, Rank Sum, Rank Reciprocal, dan Rank Order Centroid yang dikombinasikan dengan metode TOPSIS untuk menghasilkan peringkat alternatif yang lebih objektif dan konsisten.</div>
                          <div class="feature-tag">4 Metode Pembobotan</div>
                      </div>
                  </div>
@@ -63,7 +63,7 @@
                      </svg>
                  </div>
                  <div class="feature-title">Kriteria yang Komprehensif</div>
-                 <div class="feature-desc">Evaluasi berdasarkan 5 kriteria utama: harga, jarak tempuh, waktu pengisian daya, kapasitas baterai, dan daya maksmum.</div>
+                 <div class="feature-desc">Evaluasi berdasarkan 5 kriteria utama: Harga, jarak tempuh, waktu pengisian daya, kapasitas baterai, dan daya maksmum.</div>
                  <div class="feature-tag">5 Kriteria Penilaian</div>
              </div>
 

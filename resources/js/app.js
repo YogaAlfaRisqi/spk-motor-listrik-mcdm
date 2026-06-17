@@ -63,7 +63,7 @@ function initWeightChart() {
         series: [
             { name: "EW", data: ew },
             { name: "RS", data: rs },
-            { name: "RS", data: rr },
+            { name: "RR", data: rr },
             { name: "ROC", data: roc },
         ],
         chart: {

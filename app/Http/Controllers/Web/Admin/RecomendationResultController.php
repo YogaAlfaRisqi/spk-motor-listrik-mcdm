@@ -55,7 +55,7 @@ class RecomendationResultController extends Controller
             ],
             'compare' => [
                 'title' => 'Result Comparation',
-                'desc' => 'Metode ROC menggunakan pendekatan centroid.',
+                'desc' => 'Perbandingan hasil perangkingan dari 4 metode.',
                 'color' => 'orange',
                 'formula' => '-',
             ],

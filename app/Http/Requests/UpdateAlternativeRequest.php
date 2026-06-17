@@ -28,7 +28,7 @@ class UpdateAlternativeRequest extends FormRequest
             'waktu_pengisian' => 'required|integer',
             'kapasitas_baterai' => 'required|numeric',
             'daya_maksimum'   => 'required|numeric',
-            'image'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'image'             => 'nullable|image|mimes:jpg,jpeg,png|max:5000',
         ];
     }
 }
